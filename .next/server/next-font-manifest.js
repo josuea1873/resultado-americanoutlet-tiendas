@@ -1,0 +1,1 @@
+self.__NEXT_FONT_MANIFEST="{\"pages\":{},\"app\":{\"/Users/alejandro/Documents/Visual Studio Code/American Outlet/app/layout\":[\"static/media/558ca1a6aa3cb55e-s.p.woff2\",\"static/media/3dc379dc9b5dec12-s.p.woff2\"]},\"appUsingSizeAdjust\":true,\"pagesUsingSizeAdjust\":false}"

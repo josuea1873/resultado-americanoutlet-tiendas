@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendarios Mayo 2026 — AO Revolution × Bralto</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f5f5f5;
+    --black: #0a0a0a;
+    --dark: #1a1a1a;
+    --orange: #ff6b2b;
+    --orange-soft: rgba(255,107,43,0.08);
+    --orange-mid: rgba(255,107,43,0.15);
+    --gray-700: #555555;
+    --gray-500: #888888;
+    --gray-400: #aaaaaa;
+    --gray-200: #e5e5e5;
+    --gray-100: #f0f0f0;
+    --border: rgba(0,0,0,0.06);
+    --border-strong: rgba(0,0,0,0.1);
+    --green: #16a34a;
+    --green-soft: rgba(22,163,74,0.08);
+    --purple: #7c3aed;
+    --purple-soft: rgba(124,58,237,0.08);
+    --red-soft: rgba(220,38,38,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--black);
+    font-family: 'Sora', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  .container { max-width: 1040px; margin: 0 auto; padding: 0 28px; }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: var(--black);
+    color: white;
+    padding: 72px 28px 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% -20%, rgba(255,107,43,0.18) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--orange); margin-bottom: 22px; position: relative; z-index: 1;
+  }
+  .hero-title {
+    font-size: clamp(2.6rem, 7vw, 4.4rem);
+    font-weight: 800; line-height: 1; color: white;
+    margin-bottom: 10px; position: relative; z-index: 1;
+  }
+  .hero-title .accent { color: var(--orange); }
+  .hero-tagline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.3); position: relative; z-index: 1;
+    margin-bottom: 48px;
+  }
+  .hero-stats {
+    display: flex; justify-content: center; align-items: center; gap: 0;
+    position: relative; z-index: 1; flex-wrap: wrap;
+  }
+  .hero-stat { text-align: center; padding: 0 28px; }
+  .hero-stat-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.8rem; font-weight: 700; color: var(--orange);
+    display: block; line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 0.6rem; color: rgba(255,255,255,0.35);
+    text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px;
+  }
+  .hero-divider { width: 1px; height: 36px; background: rgba(255,255,255,0.08); }
+
+  /* ══ TABS ══ */
+  .tabs-nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border-strong);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+  }
+  .tabs-nav-inner {
+    max-width: 1040px; margin: 0 auto; padding: 0 28px;
+    display: flex; gap: 0;
+  }
+  .tab-btn {
+    padding: 16px 22px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
+    font-weight: 600; color: var(--gray-500);
+    border: none; background: none; cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    position: relative; bottom: -1px;
+  }
+  .tab-btn.active { color: var(--orange); border-bottom-color: var(--orange); }
+  .tab-btn:hover:not(.active) { color: var(--black); }
+
+  /* ══ SECTION BASE ══ */
+  .tab-pane { display: none; padding: 60px 0 80px; }
+  .tab-pane.active { display: block; }
+
+  .s-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--orange); margin-bottom: 8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .s-label::before { content: ''; width: 20px; height: 1px; background: var(--orange); }
+  .s-title { font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 700; color: var(--black); margin-bottom: 6px; }
+  .s-desc { color: var(--gray-700); font-size: 0.85rem; font-weight: 300; max-width: 560px; }
+  .section-header { margin-bottom: 40px; }
+
+  /* ══ CONCEPT CARD ══ */
+  .concept-card {
+    background: var(--black); color: white;
+    border-radius: 18px; padding: 36px 40px;
+    margin-bottom: 44px; position: relative; overflow: hidden;
+  }
+  .concept-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--orange), transparent);
+  }
+  .concept-name {
+    font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 800;
+    color: white; margin-bottom: 6px;
+  }
+  .concept-name .o { color: var(--orange); }
+  .concept-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.3); margin-bottom: 22px;
+  }
+  .concept-body {
+    font-size: 0.88rem; color: rgba(255,255,255,0.55);
+    font-weight: 300; line-height: 1.75; max-width: 640px; margin-bottom: 24px;
+  }
+  .concept-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+  .concept-tag {
+    padding: 5px 14px; border-radius: 100px; font-size: 0.68rem;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.5);
+  }
+  .concept-tag.hot {
+    background: var(--orange-soft); border-color: rgba(255,107,43,0.3);
+    color: var(--orange);
+  }
+
+  /* ══ PHASE HEADER ══ */
+  .phase-block { margin-bottom: 44px; }
+  .phase-head {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 18px; padding-bottom: 14px;
+    border-bottom: 1px solid var(--border-strong);
+    flex-wrap: wrap;
+  }
+  .phase-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.56rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 100px;
+  }
+  .ph-expect { background: var(--black); color: white; }
+  .ph-launch { background: var(--orange); color: white; }
+  .ph-convert { background: var(--green); color: white; }
+  .phase-title { font-size: 1.05rem; font-weight: 700; color: var(--black); }
+  .phase-dates {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; color: var(--gray-500); margin-left: auto;
+  }
+
+  .week-sep {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gray-400); margin: 20px 0 10px;
+    padding-left: 4px; border-left: 2px solid var(--orange);
+    padding-left: 10px;
+  }
+
+  /* ══ DAY CARDS ══ */
+  .day-stack { display: flex; flex-direction: column; gap: 8px; }
+
+  .day-card {
+    display: grid; grid-template-columns: 72px 1fr;
+    border-radius: 12px; border: 1px solid var(--border-strong);
+    overflow: hidden; background: var(--bg);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .day-card:hover { border-color: rgba(0,0,0,0.15); box-shadow: 0 3px 14px rgba(0,0,0,0.04); }
+
+  .day-date {
+    background: var(--black); color: white;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 12px 8px; text-align: center;
+  }
+  .day-card.is-launch .day-date { background: var(--orange); }
+  .day-card.is-key .day-date { background: #1a1a1a; }
+  .d-dow {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.5rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35);
+    margin-bottom: 3px;
+  }
+  .d-dom {
+    font-family: 'JetBrains Mono', monospace; font-size: 1.35rem;
+    font-weight: 700; color: white; line-height: 1;
+  }
+  .d-mes {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.46rem;
+    color: rgba(255,255,255,0.25); text-transform: uppercase; margin-top: 2px;
+  }
+
+  .day-body { padding: 13px 16px; display: flex; flex-direction: column; gap: 7px; }
+
+  .day-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.52rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 5px;
+  }
+  .t-reel { background: var(--orange); color: white; }
+  .t-post { background: var(--black); color: white; }
+  .t-story { background: var(--purple-soft); color: var(--purple); border: 1px solid rgba(124,58,237,0.2); }
+  .t-live { background: var(--red-soft); color: #dc2626; border: 1px solid rgba(220,38,38,0.2); }
+  .t-broadcast { background: var(--green-soft); color: var(--green); border: 1px solid rgba(22,163,74,0.2); }
+  .t-platform { background: var(--gray-100); color: var(--gray-500); border: 1px solid var(--border); font-weight: 500; }
+
+  .day-concept { font-size: 0.8rem; font-weight: 500; color: var(--black); line-height: 1.45; }
+
+  .day-copy {
+    font-size: 0.72rem; color: var(--gray-700); font-weight: 300;
+    line-height: 1.55; font-style: italic;
+    padding: 7px 10px; background: var(--gray-100); border-radius: 7px;
+    border-left: 2px solid var(--orange);
+  }
+  .day-copy-label {
+    font-style: normal; font-weight: 600; font-size: 0.58rem;
+    font-family: 'JetBrains Mono', monospace; color: var(--orange);
+    text-transform: uppercase; letter-spacing: 0.08em; display: block;
+    margin-bottom: 3px;
+  }
+  .day-obj {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.56rem; color: var(--gray-500); text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .day-obj::before { content: '→ '; color: var(--orange); }
+
+  /* ══ CAMPAIGN CALENDAR ══ */
+  .camp-block {
+    border-radius: 16px; border: 1px solid var(--border-strong);
+    overflow: hidden; margin-bottom: 16px;
+  }
+  .camp-head {
+    padding: 18px 24px; display: flex; align-items: center; gap: 12px;
+    flex-wrap: wrap;
+  }
+  .camp-head.h-pre { background: var(--black); }
+  .camp-head.h-launch { background: var(--orange); }
+  .camp-head.h-post { background: var(--dark); }
+  .camp-head-name { font-size: 0.95rem; font-weight: 700; color: white; }
+  .camp-head-dates {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; color: rgba(255,255,255,0.4); margin-left: auto;
+  }
+
+  .camp-rows { display: flex; flex-direction: column; }
+  .camp-row {
+    display: grid; grid-template-columns: 130px 1fr 110px;
+    gap: 16px; align-items: start;
+    padding: 15px 24px; border-bottom: 1px solid var(--border);
+  }
+  .camp-row:last-child { border-bottom: none; }
+  .camp-plat {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--black); padding-top: 2px;
+  }
+  .camp-plat small { display: block; font-weight: 300; color: var(--gray-500); font-size: 0.56rem; margin-top: 2px; text-transform: none; letter-spacing: 0; }
+  .camp-detail { font-size: 0.78rem; color: var(--gray-700); font-weight: 300; line-height: 1.55; }
+  .camp-detail strong { color: var(--black); font-weight: 600; }
+  .camp-budget {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem; font-weight: 700; color: var(--orange);
+    text-align: right; white-space: nowrap;
+  }
+  .camp-budget small { display: block; font-size: 0.52rem; color: var(--gray-500); font-weight: 400; margin-top: 2px; }
+
+  .budget-summary {
+    background: var(--gray-100); border: 1px solid var(--border-strong);
+    border-radius: 14px; padding: 24px 28px; margin-top: 28px;
+  }
+  .budget-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--gray-500); margin-bottom: 16px;
+  }
+  .budget-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; }
+  .budget-item-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.35rem; font-weight: 700; color: var(--black);
+  }
+  .budget-item-num.total { color: var(--orange); }
+  .budget-item-label { font-size: 0.68rem; color: var(--gray-500); margin-top: 2px; }
+  .budget-note { font-size: 0.62rem; color: var(--gray-500); font-style: italic; margin-top: 14px; line-height: 1.5; }
+
+  /* ══ VISITAS ══ */
+  .visita-stack { display: flex; flex-direction: column; gap: 14px; }
+
+  .visita-card {
+    display: grid; grid-template-columns: 108px 1fr;
+    border-radius: 14px; border: 1px solid var(--border-strong);
+    overflow: hidden;
+  }
+  .visita-date {
+    background: var(--black); color: white;
+    padding: 18px 12px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+    gap: 3px;
+  }
+  .visita-card.is-launch .visita-date { background: var(--orange); }
+  .v-dow { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.35); }
+  .v-dom { font-family: 'JetBrains Mono', monospace; font-size: 1.9rem; font-weight: 800; color: white; line-height: 1; }
+  .v-mes { font-family: 'JetBrains Mono', monospace; font-size: 0.48rem; color: rgba(255,255,255,0.25); text-transform: uppercase; }
+  .v-badge {
+    margin-top: 8px; padding: 3px 10px; border-radius: 100px;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.48rem;
+    font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .vb-pre { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); }
+  .vb-launch { background: rgba(255,255,255,0.2); color: white; }
+  .vb-post { background: rgba(22,163,74,0.25); color: #86efac; }
+
+  .visita-body { padding: 20px 24px; }
+  .visita-body h4 { font-size: 0.92rem; font-weight: 700; color: var(--black); margin-bottom: 12px; }
+  .visita-items { display: flex; flex-direction: column; gap: 7px; }
+  .visita-item { display: flex; gap: 10px; font-size: 0.78rem; color: var(--gray-700); font-weight: 300; align-items: flex-start; line-height: 1.5; }
+  .visita-item::before { content: '—'; color: var(--orange); font-weight: 600; flex-shrink: 0; padding-top: 1px; }
+  .visita-item strong { color: var(--black); font-weight: 600; }
+  .visita-entregable {
+    margin-top: 12px; padding: 8px 12px;
+    background: var(--orange-soft); border: 1px solid var(--orange-mid);
+    border-radius: 8px; font-size: 0.72rem; color: var(--orange); font-weight: 500;
+  }
+  .visita-entregable::before { content: 'Entregable: '; font-weight: 700; }
+
+  /* ══ RESPONSIVE ══ */
+  @media (max-width: 640px) {
+    .hero { padding: 52px 20px 44px; }
+    .hero-stat { padding: 0 16px; }
+    .day-card { grid-template-columns: 58px 1fr; }
+    .camp-row { grid-template-columns: 1fr; }
+    .camp-budget { text-align: left; }
+    .visita-card { grid-template-columns: 80px 1fr; }
+    .concept-card { padding: 24px 22px; }
+    .tab-btn { padding: 14px 12px; font-size: 0.56rem; }
+  }
+
+  @media print {
+    .tabs-nav { display: none; }
+    .tab-pane { display: block !important; page-break-before: always; }
+    .tab-pane:first-of-type { page-break-before: avoid; }
+  }
+
+  /* ══ INTERACTIVE CALENDAR — MINIMAL ══ */
+  .cal-legend { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 10px; }
+  .leg-item { display: flex; align-items: center; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.08em; }
+  .leg-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gray-400); flex-shrink: 0; }
+
+  .phase-legend { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 24px; align-items: center; }
+  .pl-item { font-family: 'JetBrains Mono', monospace; font-size: 0.54rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.08em; display: flex; align-items: center; gap: 7px; }
+  .pl-item::before { content: ''; display: inline-block; width: 18px; height: 2px; border-radius: 1px; flex-shrink: 0; }
+  .pl-e::before { background: var(--black); }
+  .pl-l::before { background: var(--orange); }
+  .pl-c::before { background: var(--gray-400); }
+
+  .cal-grid { border: 1px solid var(--border-strong); border-radius: 10px; overflow: hidden; }
+  .cal-headers { display: grid; grid-template-columns: repeat(7, 1fr); border-bottom: 1px solid var(--border-strong); }
+  .cal-headers div { text-align: center; padding: 10px 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.52rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-500); }
+  .cal-body { display: grid; grid-template-columns: repeat(7, 1fr); }
+
+  .cal-cell {
+    min-height: 80px; padding: 10px 9px 8px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    border-top: 2px solid transparent;
+    display: flex; flex-direction: column; gap: 6px;
+    cursor: default; background: white;
+    transition: background 0.1s;
+  }
+  .cal-cell:nth-child(7n) { border-right: none; }
+  .cal-cell.empty { background: var(--surface); cursor: default; }
+  .cal-cell.has-content { cursor: pointer; }
+  .cal-cell.has-content:hover { background: var(--gray-100); }
+  .cal-cell.selected { background: var(--black) !important; }
+  .cal-cell.selected .cal-num { color: white; }
+  .cal-cell.selected .cdot { opacity: 0.35; }
+
+  .cal-cell.phase-e { border-top-color: var(--black); }
+  .cal-cell.phase-l { border-top-color: var(--orange); }
+  .cal-cell.phase-c { border-top-color: var(--gray-400); }
+
+  .cal-num { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 700; color: var(--black); line-height: 1; }
+  .cal-cell.phase-none .cal-num { color: var(--gray-400); }
+  .cal-cell.empty .cal-num { display: none; }
+
+  .cal-dots { display: flex; gap: 3px; flex-wrap: wrap; }
+  .cdot { width: 5px; height: 5px; border-radius: 50%; background: var(--gray-400); flex-shrink: 0; }
+  .cdot-reel { background: var(--orange); }
+  .cdot-broadcast { background: var(--black); }
+
+  /* ── Modal ── */
+  .cal-modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(10,10,10,0.5);
+    z-index: 200;
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.15s;
+  }
+  .cal-modal-overlay.open { opacity: 1; pointer-events: all; }
+
+  .cal-modal {
+    background: white; border-radius: 12px;
+    width: 100%; max-width: 540px;
+    max-height: 82vh; overflow-y: auto;
+    position: relative;
+    transform: translateY(10px) scale(0.99);
+    transition: transform 0.15s;
+  }
+  .cal-modal-overlay.open .cal-modal { transform: translateY(0) scale(1); }
+
+  .cal-modal-close {
+    position: absolute; top: 12px; right: 14px;
+    background: none; border: none; cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem; color: var(--gray-400);
+    padding: 6px 8px; line-height: 1;
+    transition: color 0.1s;
+  }
+  .cal-modal-close:hover { color: var(--black); }
+
+  .detail-head { padding: 22px 52px 16px 22px; border-bottom: 1px solid var(--border); }
+  .detail-head-top { display: flex; align-items: baseline; gap: 10px; margin-bottom: 3px; }
+  .detail-date { font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; font-weight: 700; color: var(--black); }
+  .detail-phase { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-400); }
+  .dp-l { color: var(--orange); }
+  .detail-count { font-family: 'JetBrains Mono', monospace; font-size: 0.52rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.06em; }
+
+  .detail-items { padding: 6px 22px 22px; display: flex; flex-direction: column; }
+  .det-item { padding: 16px 0; border-bottom: 1px solid var(--border); }
+  .det-item:last-child { border-bottom: none; }
+
+  .det-item-head { display: flex; align-items: center; gap: 8px; margin-bottom: 9px; }
+  .det-time { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 700; color: var(--black); }
+  .det-type { font-family: 'JetBrains Mono', monospace; font-size: 0.52rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-500); }
+  .dt-reel { color: var(--orange); font-weight: 700; }
+  .dt-broadcast { font-weight: 700; }
+  .det-plat { font-family: 'JetBrains Mono', monospace; font-size: 0.48rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.06em; }
+
+  .det-item-body { display: flex; flex-direction: column; gap: 7px; }
+  .det-title { font-size: 0.83rem; font-weight: 600; color: var(--black); line-height: 1.4; }
+  .det-concept { font-size: 0.74rem; color: var(--gray-700); font-weight: 300; line-height: 1.6; }
+  .det-copy { font-size: 0.73rem; color: var(--black); line-height: 1.55; padding-left: 12px; border-left: 2px solid var(--orange); }
+  .det-obj { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.06em; }
+
+  @media (max-width: 600px) {
+    .cal-cell { min-height: 56px; padding: 7px 6px 6px; }
+    .cal-num { font-size: 0.64rem; }
+    .cal-headers div { font-size: 0.46rem; padding: 8px 2px; }
+    .cal-modal-overlay { padding: 0; align-items: flex-end; }
+    .cal-modal { border-bottom-left-radius: 0; border-bottom-right-radius: 0; max-height: 88vh; max-width: 100%; }
+  }
+
+  @media (max-width: 380px) {
+    .cal-cell { min-height: 46px; padding: 6px 4px 4px; gap: 3px; }
+    .cal-num { font-size: 0.58rem; }
+    .cdot { width: 4px; height: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-label">American Outlet × Bralto · Calendarios Mayo 2026</div>
+  <h1 class="hero-title">AO <span class="accent">Revolution</span></h1>
+  <p class="hero-tagline">El único outlet americano · San Carlos · Costa Rica</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="hero-stat-num">10</span><span class="hero-stat-label">días de expectativa</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="hero-stat-num">15</span><span class="hero-stat-label">mayo · lanzamiento</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="hero-stat-num">26</span><span class="hero-stat-label">piezas de contenido</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="hero-stat-num">3</span><span class="hero-stat-label">fases estratégicas</span></div>
+  </div>
+</header>
+
+<!-- NAVIGATION -->
+<nav class="tabs-nav">
+  <div class="tabs-nav-inner">
+    <button class="tab-btn active" onclick="switchTab('pub', this)">01 · Publicaciones</button>
+    <button class="tab-btn" onclick="switchTab('camp', this)">02 · Campañas</button>
+    <button class="tab-btn" onclick="switchTab('vis', this)">03 · Visitas</button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- TAB 1: PUBLICACIONES                               -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="pane-pub" class="tab-pane active">
+  <div class="container">
+
+    <div class="section-header">
+      <div class="s-label">01 · Calendario de contenido</div>
+      <h2 class="s-title">Mayo 2026 — AO Revolution</h2>
+      <p class="s-desc">Hacé click en cualquier día para ver exactamente qué publicar, a qué hora y con qué copy.</p>
+    </div>
+
+    <div class="cal-legend">
+      <span class="leg-item"><span class="leg-dot" style="background:var(--orange)"></span>Reel</span>
+      <span class="leg-item"><span class="leg-dot"></span>Post</span>
+      <span class="leg-item"><span class="leg-dot"></span>Story</span>
+      <span class="leg-item"><span class="leg-dot"></span>Live</span>
+      <span class="leg-item"><span class="leg-dot" style="background:var(--black)"></span>Broadcast WA</span>
+    </div>
+    <div class="phase-legend">
+      <span class="pl-item pl-e">Expectativa · 5–14 mayo</span>
+      <span class="pl-item pl-l">Lanzamiento · 15–17 mayo</span>
+      <span class="pl-item pl-c">Conversión · 18–31 mayo</span>
+    </div>
+
+    <div class="cal-grid">
+      <div class="cal-headers">
+        <div>Dom</div><div>Lun</div><div>Mar</div>
+        <div>Mié</div><div>Jue</div><div>Vie</div><div>Sáb</div>
+      </div>
+      <div class="cal-body" id="cal-body"></div>
+    </div>
+
+    <div class="cal-modal-overlay" id="cal-modal-overlay" onclick="handleOverlayClick(event)">
+      <div class="cal-modal" id="cal-modal">
+        <button class="cal-modal-close" onclick="closeCalModal()">✕ cerrar</button>
+        <div id="cal-modal-content"></div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- end tab publicaciones -->
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- TAB 2: CAMPAÑAS                                    -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="pane-camp" class="tab-pane">
+  <div class="container">
+
+    <div class="section-header">
+      <div class="s-label">02 · Campañas publicitarias</div>
+      <h2 class="s-title">Pauta Pagada · Mayo 2026</h2>
+      <p class="s-desc">Activación por plataforma y fase. El presupuesto de pauta (ad spend) va adicional a la mensualidad del servicio — es la inversión directa en Meta y Google.</p>
+    </div>
+
+    <!-- Fase Pre -->
+    <div class="camp-block">
+      <div class="camp-head h-pre">
+        <span class="phase-badge ph-expect">Fase 1</span>
+        <span class="camp-head-name">Pre-Lanzamiento · Sembrar expectativa</span>
+        <span class="camp-head-dates">12–14 mayo · 3 días</span>
+      </div>
+      <div class="camp-rows">
+        <div class="camp-row">
+          <div class="camp-plat">Meta Ads<small>IG + FB · Video Views</small></div>
+          <div class="camp-detail"><strong>Objetivo: Alcance máximo + video views</strong> — Boosting del reel teaser del 12 de mayo. Audiencia: San Carlos y zonas cercanas (Pital, Aguas Zarcas, La Fortuna, Venecia), 18–45 años, intereses en moda / marcas / ropa. Excluir audiencias que ya compraron. Creative: el teaser cinemático de unboxing, sin revelar productos.</div>
+          <div class="camp-budget">$6–8<small>/día · 3 días</small></div>
+        </div>
+        <div class="camp-row">
+          <div class="camp-plat">WhatsApp<small>Broadcast · base actual</small></div>
+          <div class="camp-detail"><strong>Mensaje de expectativa a la base de contactos</strong> — Anunciar que algo grande viene el 15. No revelar qué es. Link directo al perfil de IG para que vean el teaser. Enviar el 13 de mayo a las 10am.</div>
+          <div class="camp-budget">Sin costo<small>de pauta</small></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fase Launch -->
+    <div class="camp-block">
+      <div class="camp-head h-launch">
+        <span class="phase-badge" style="background:rgba(255,255,255,0.2);color:white;">Fase 2</span>
+        <span class="camp-head-name">Lanzamiento · Máxima activación</span>
+        <span class="camp-head-dates">15–18 mayo · 4 días</span>
+      </div>
+      <div class="camp-rows">
+        <div class="camp-row">
+          <div class="camp-plat">Meta Ads<small>IG + FB · Alcance + Tráfico</small></div>
+          <div class="camp-detail"><strong>Objetivo: Tráfico físico a tienda — máxima amplitud</strong> — Boosting agresivo del Reel Héroe del 15 de mayo. Campaña paralela de tráfico con CTA "Cómo llegar" hacia AO1, Florencia y Fortuna. Audiencia ampliada: toda la región de San Carlos. Budget concentrado en estos 4 días — es el momento de mayor ROI del mes.</div>
+          <div class="camp-budget">$15–20<small>/día · 4 días</small></div>
+        </div>
+        <div class="camp-row">
+          <div class="camp-plat">Google Ads<small>Búsqueda · demanda activa</small></div>
+          <div class="camp-detail"><strong>Objetivo: Capturar quien ya busca</strong> — Activar campañas de búsqueda para términos: "outlet ropa San Carlos", "ropa de marca Costa Rica", "American Outlet", "calzado de marca Costa Rica", "liquidación ropa". Extensiones de ubicación para las 3 tiendas. Campaña de marca para proteger el nombre.</div>
+          <div class="camp-budget">$8–12<small>/día · 4 días</small></div>
+        </div>
+        <div class="camp-row">
+          <div class="camp-plat">WhatsApp<small>Broadcast · día 15</small></div>
+          <div class="camp-detail"><strong>Mensaje de lanzamiento a toda la base</strong> — Enviar a las 10:00am del 15 de mayo con foto/video del 3er piso ya abierto. CTA directo: "Venís hoy?" Usar el día de quincena como ancla de urgencia. Texto breve, impactante, con dirección y horario.</div>
+          <div class="camp-budget">Sin costo<small>de pauta</small></div>
+        </div>
+        <div class="camp-row">
+          <div class="camp-plat">Instagram<small>Story Ads · awareness</small></div>
+          <div class="camp-detail"><strong>Story ads verticales del lanzamiento</strong> — Corte del reel de 15 segundos adaptado a formato story. Audiencia similar (lookalike) a los clientes que ya interactuaron con AO. Objetivo: alcance de personas no orgánicas que no siguen la cuenta.</div>
+          <div class="camp-budget">$5–8<small>/día · 3 días</small></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fase Post -->
+    <div class="camp-block">
+      <div class="camp-head h-post">
+        <span class="phase-badge" style="background:rgba(22,163,74,0.3);color:#86efac;">Fase 3</span>
+        <span class="camp-head-name">Conversión sostenida</span>
+        <span class="camp-head-dates">19–31 mayo · 13 días</span>
+      </div>
+      <div class="camp-rows">
+        <div class="camp-row">
+          <div class="camp-plat">Meta Ads<small>Retargeting · conversión</small></div>
+          <div class="camp-detail"><strong>Objetivo: Reactivar a los que vieron pero no fueron</strong> — Retargeting a audiencias que vieron el video de lanzamiento +50% pero no interactuaron con CTA de ubicación. Creativos de producto específico con precio visible. Rotar 2–3 productos por semana para evitar fatiga creativa.</div>
+          <div class="camp-budget">$8–10<small>/día · 13 días</small></div>
+        </div>
+        <div class="camp-row">
+          <div class="camp-plat">Google Ads<small>Display + Búsqueda</small></div>
+          <div class="camp-detail"><strong>Objetivo: Mantener visibilidad de marca + capturar nuevos interesados</strong> — Display remarketing a visitantes del sitio web AO. Banner editorial con productos del 3er piso. Búsqueda activa por términos de categoría (calzado, ropa de marca, outlet). Frecuencia controlada.</div>
+          <div class="camp-budget">$5–8<small>/día · 13 días</small></div>
+        </div>
+        <div class="camp-row">
+          <div class="camp-plat">WhatsApp<small>Seguimiento leads</small></div>
+          <div class="camp-detail"><strong>Seguimiento personalizado de leads captados</strong> — Contactar a quienes escribieron por WhatsApp y no visitaron. Dar información personalizada según lo que preguntaron. No es spam — es conversación de valor con intención de visita. Registrar en CRM Bralto.</div>
+          <div class="camp-budget">Sin costo<small>de pauta</small></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Budget summary -->
+    <div class="budget-summary">
+      <div class="budget-label">Estimación de inversión en pauta · Mayo 2026</div>
+      <div class="budget-grid">
+        <div>
+          <div class="budget-item-num">$85–120</div>
+          <div class="budget-item-label">Meta Ads · total del mes</div>
+        </div>
+        <div>
+          <div class="budget-item-num">$85–130</div>
+          <div class="budget-item-label">Google Ads · total del mes</div>
+        </div>
+        <div>
+          <div class="budget-item-num total">~$170–250</div>
+          <div class="budget-item-label">Total pauta estimada / mes</div>
+        </div>
+      </div>
+      <p class="budget-note">* Este presupuesto de pauta va adicional a la mensualidad del servicio ($2,000). Son rangos conservadores y se ajustan según los resultados de la primera semana de lanzamiento. Recomendamos concentrar el 40% del budget en los días 12–18 de mayo.</p>
+    </div>
+
+  </div>
+</div><!-- end tab campañas -->
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- TAB 3: VISITAS                                     -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="pane-vis" class="tab-pane">
+  <div class="container">
+
+    <div class="section-header">
+      <div class="s-label">03 · Calendario interno</div>
+      <h2 class="s-title">Visitas al Cliente · Mayo 2026</h2>
+      <p class="s-desc">Una visita semanal para medir rendimientos, alinear estrategia y mantener el proyecto en carril. Cada visita tiene agenda definida y un entregable claro.</p>
+    </div>
+
+    <div class="visita-stack">
+
+      <div class="visita-card">
+        <div class="visita-date">
+          <div class="v-dow">Jueves</div>
+          <div class="v-dom">08</div>
+          <div class="v-mes">mayo</div>
+          <div class="v-badge vb-pre">Pre-lanzamiento</div>
+        </div>
+        <div class="visita-body">
+          <h4>Visita 1 — Preparación y alineación estratégica</h4>
+          <div class="visita-items">
+            <div class="visita-item">Verificar estado físico del 3er piso — ¿listo para el lanzamiento del 15?</div>
+            <div class="visita-item">Brief al creador de contenido: revisar el calendario semana 1 y 2, resolver dudas de concepto y ejecución</div>
+            <div class="visita-item">Confirmar con Christian cuáles son los 3–5 productos estrella que van a protagonizar el reel de lanzamiento</div>
+            <div class="visita-item">Revisar setup técnico: GTM instalado en el sitio, píxel de Meta activo, Google Ads configurado y listo</div>
+            <div class="visita-item">Alinear el mensaje del broadcast de WhatsApp para el día 13 (expectativa previa)</div>
+            <div class="visita-item">Confirmar el nombre final de la campaña: <strong>AO Revolution</strong> / variante si hay preferencia del cliente</div>
+          </div>
+          <div class="visita-entregable">aprobación del concepto de campaña y productos estrella confirmados</div>
+        </div>
+      </div>
+
+      <div class="visita-card is-launch">
+        <div class="visita-date">
+          <div class="v-dow">Jueves</div>
+          <div class="v-dom">15</div>
+          <div class="v-mes">mayo</div>
+          <div class="v-badge vb-launch">Día de lanzamiento</div>
+        </div>
+        <div class="visita-body">
+          <h4>Visita 2 — Presencia en tienda · Gran día</h4>
+          <div class="visita-items">
+            <div class="visita-item">Presencia física en AO1 desde temprano para el lanzamiento del 3er piso (aprovechar la quincena)</div>
+            <div class="visita-item">Supervisión o apoyo en la producción del Reel Héroe del día — confirmar que esté publicado antes de las 9am</div>
+            <div class="visita-item">Verificar que las campañas Meta y Google estén corriendo correctamente desde las primeras horas</div>
+            <div class="visita-item">Supervisar el envío del broadcast de WhatsApp a las 10:00am</div>
+            <div class="visita-item">Capturar reacciones genuinas de los primeros clientes para usar como contenido ese mismo día</div>
+            <div class="visita-item">Revisar en tiempo real el desempeño inicial de las campañas (CTR, alcance, mensajes recibidos)</div>
+          </div>
+          <div class="visita-entregable">contenido del día 15 publicado + campañas activas confirmadas + primeras métricas del día</div>
+        </div>
+      </div>
+
+      <div class="visita-card">
+        <div class="visita-date">
+          <div class="v-dow">Jueves</div>
+          <div class="v-dom">22</div>
+          <div class="v-mes">mayo</div>
+          <div class="v-badge vb-post">Post-lanzamiento</div>
+        </div>
+        <div class="visita-body">
+          <h4>Visita 3 — Primera semana post-lanzamiento</h4>
+          <div class="visita-items">
+            <div class="visita-item"><strong>Métricas de ventas:</strong> ¿cuánto se vendió del 15 al 21? ¿Cuáles productos rotaron más? ¿Cuáles no se movieron?</div>
+            <div class="visita-item"><strong>Métricas digitales:</strong> alcance del reel de lanzamiento, seguidores nuevos, mensajes recibidos por WhatsApp, clicks en campañas</div>
+            <div class="visita-item">Ajuste de campañas según datos reales: ¿qué audiencia generó mejor resultado? Reasignar presupuesto si aplica</div>
+            <div class="visita-item">Revisión de inventario: ¿qué se está agotando? → convertir escasez real en contenido de urgencia semana 3</div>
+            <div class="visita-item">Brief al creador para semana 3: confirmar productos estrella #1 y #2 basados en rotación real</div>
+            <div class="visita-item">Revisar el feedback de los encargados de AO Florencia y AO Fortuna — ¿cómo va el impacto en las otras sucursales?</div>
+          </div>
+          <div class="visita-entregable">reporte de primera semana + ajuste de campañas + brief creativo para semana 3</div>
+        </div>
+      </div>
+
+      <div class="visita-card">
+        <div class="visita-date">
+          <div class="v-dow">Jueves</div>
+          <div class="v-dom">29</div>
+          <div class="v-mes">mayo</div>
+          <div class="v-badge vb-post">Cierre de mes</div>
+        </div>
+        <div class="visita-body">
+          <h4>Visita 4 — Cierre de mayo y planeación de junio</h4>
+          <div class="visita-items">
+            <div class="visita-item"><strong>Métricas finales de mayo:</strong> ventas totales vs objetivo, tráfico digital acumulado, leads captados, seguidores ganados, inversión en pauta vs resultados</div>
+            <div class="visita-item">¿Qué piezas de contenido generaron visitas físicas medibles? Identificar los formatos que funcionaron para replicar en junio</div>
+            <div class="visita-item">Estado del inventario post-lanzamiento: ¿qué sigue disponible para junio? ¿Cuándo llega más mercadería?</div>
+            <div class="visita-item">Revisar resultados de la story interactiva del 27 mayo — qué pidió la audiencia para junio</div>
+            <div class="visita-item">Definir el concepto de junio: ¿continuación de AO Revolution o nueva campaña? ¿Cuál es el eje estratégico?</div>
+            <div class="visita-item">Alineación con Christian sobre prioridades del negocio para Q3 — ¿hay eventos, fechas clave o mercadería nueva proyectada?</div>
+          </div>
+          <div class="visita-entregable">resumen ejecutivo de mayo + propuesta de concepto y calendario para junio</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div><!-- end tab visitas -->
+
+<script>
+  function switchTab(id, btn) {
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('pane-' + id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: document.querySelector('.tabs-nav').offsetTop - 10, behavior: 'smooth' });
+  }
+
+  /* ══ CALENDAR DATA ══ */
+  const CALENDAR_DATA = {
+    5: {
+      items: [
+        { time: '8:00am', type: 'reel', platforms: ['IG', 'TikTok'],
+          title: 'Teaser: Algo se viene',
+          concept: 'Pantalla en negro. Sonido de caja abriéndose. Fade out. Sin texto, sin contexto. Solo intriga pura. 10 segundos máximo.',
+          copy: 'Algo se viene. 🔶',
+          obj: 'Intriga — activar la curiosidad desde el día 1' },
+        { time: '12:00pm', type: 'story', platforms: ['IG'],
+          title: 'Encuesta: ¿Adivináis qué?',
+          concept: 'Story con fondo oscuro: "¿Sabés qué se viene para American Outlet?" Opción A: "Sí, ya sé" | Opción B: "No tengo ni idea". Sin revelar nada.',
+          copy: '¿Ya sabés lo que se viene? 👀',
+          obj: 'Engagament — mapear quién ya tiene información' },
+        { time: '7:00pm', type: 'post', platforms: ['IG', 'FB'],
+          title: 'La fecha: 15.05.2026',
+          concept: 'Imagen minimalista en negro con solo la fecha "15.05.2026" centrada en naranja. Sin explicación, sin contexto. La fecha lo dice todo.',
+          copy: '15.05.2026 📍 Ciudad Quesada',
+          obj: 'Sembrar la fecha en la mente del público' }
+      ]
+    },
+    6: {
+      items: [
+        { time: '8:00am', type: 'reel', platforms: ['IG', 'TikTok'],
+          title: 'Quick cut: La mercadería llega',
+          concept: 'Toma rápida de cajas en el Centro de Distribución. Nunca se ve qué hay adentro. Música de suspenso/hype. 10-15 segundos máximo.',
+          copy: 'Viene de lejos. Llega pronto. 📦',
+          obj: 'Mostrar actividad real — credibilidad + anticipación' },
+        { time: '7:00pm', type: 'story', platforms: ['IG'],
+          title: 'Slider misterioso',
+          concept: 'Story con texto "¿Ya te enteraste?" + flecha para deslizar. La siguiente story es solo el emoji 🔶 sin más info.',
+          copy: '¿Ya te enteraste? →',
+          obj: 'Generar tráfico entre stories — retención' }
+      ]
+    },
+    7: {
+      items: [
+        { time: '8:00am', type: 'post', platforms: ['IG', 'FB'],
+          title: 'Pista #1: Viene de EE.UU.',
+          concept: 'Post oscuro, texto minimalista: "Pista #1: Viene de EE.UU." con la bandera americana muy sutil de fondo. Nada más.',
+          copy: 'Pista número 1. 🇺🇸 Solo eso por ahora.',
+          obj: 'Revelar origen — construir la narrativa de importación' },
+        { time: '7:00pm', type: 'story', platforms: ['IG'],
+          title: 'Encuesta: ¿Venís el 15?',
+          concept: 'Story directa: "Confirmanos. ¿Venís el 15 de mayo a American Outlet?" Opciones: Sí / Tal vez.',
+          copy: '¿Venís el 15? Confirmen. 👇',
+          obj: 'Cualificar el interés — sembrar compromiso' }
+      ]
+    },
+    8: {
+      items: [
+        { time: '9:00am', type: 'reel', platforms: ['IG', 'TikTok'],
+          title: '¿Qué hay adentro?',
+          concept: 'Reel desde el CD. Se filma una caja enorme. La mano está por abrirla. Corte. Fin. "El 15 lo ves." Cliffhanger total.',
+          copy: 'Una caja. Una pregunta. ¿Qué hay adentro? El 15 de mayo lo sabés. 📦',
+          obj: 'Cliffhanger — máxima intriga antes del fin de semana' },
+        { time: '6:00pm', type: 'story', platforms: ['IG'],
+          title: 'Countdown: 7 días',
+          concept: 'Countdown visual con "7 días" en grande sobre fondo negro. Sin más texto. El número habla solo.',
+          copy: '7️⃣ días.',
+          obj: 'Recordatorio — urgencia del countdown' }
+      ]
+    },
+    9: {
+      items: [
+        { time: '9:00am', type: 'post', platforms: ['IG', 'FB'],
+          title: 'Pista #2: La silueta',
+          concept: 'Foto de silueta de zapatilla de marca sobre fondo negro. Sin revelar la marca. "Pista #2. ¿La reconocés?"',
+          copy: 'Pista #2. ¿La reconocés? 👟 El 15 confirmamos todo.',
+          obj: 'Engagament — comentarios y etiquetas de amigos' },
+        { time: '7:00pm', type: 'story', platforms: ['IG'],
+          title: 'Quiz: ¿Qué marca es?',
+          concept: 'Quiz con 4 opciones de marca. La respuesta correcta los sorprende. "No te podemos decir todavía... 😏" Crear conversación.',
+          copy: '¿Qué marca es? Adiviná. 👀',
+          obj: 'Engagament — interacción máxima + shares' }
+      ]
+    },
+    10: {
+      items: [
+        { time: '10:00am', type: 'reel', platforms: ['IG', 'TikTok', 'FB'],
+          title: 'El 3er piso se prepara',
+          concept: 'B-roll cinematográfico del tercer piso siendo preparado. Música épica. Sin voz, sin texto sobreimpuesto. Solo el ambiente del antes. Texto final: "5 días."',
+          copy: 'El tercer piso de American Outlet está siendo preparado para algo que San Carlos nunca ha visto. 5 días. 🔶',
+          obj: 'Mostrar transformación física — generar anticipación visual' },
+        { time: '6:00pm', type: 'story', platforms: ['IG'],
+          title: 'Encuesta de precio',
+          concept: '"Si encontrás ropa americana de marca... ¿cuánto estarías dispuesto a pagar por una pieza?" Opciones de rangos de precio.',
+          copy: '¿Cuánto pagarías por ropa americana de marca? 💬',
+          obj: 'Investigación de mercado + engagament' }
+      ]
+    },
+    11: {
+      items: [
+        { time: '12:00pm', type: 'post', platforms: ['IG', 'FB'],
+          title: 'La semana que viene, todo cambia',
+          concept: 'Post dominical con tono reflexivo. Fondo negro, texto blanco: "La semana que viene, en American Outlet, todo cambia." Sin más.',
+          copy: 'Esta semana que viene... American Outlet no va a ser igual. 🔶 ¿Ya sabés por qué?',
+          obj: 'Mantener el hype durante el fin de semana' },
+        { time: '7:00pm', type: 'story', platforms: ['IG'],
+          title: 'Tag a quien tiene que venir',
+          concept: '"Taggéale esto a quien tiene que venir el jueves 15." Simple, directo, viral. Fondo negro, texto naranja.',
+          copy: 'Mandáselo a quien tiene que estar el 15. 👇',
+          obj: 'Alcance orgánico — boca a boca digital' }
+      ]
+    },
+    12: {
+      items: [
+        { time: '8:00am', type: 'reel', platforms: ['IG', 'TikTok'],
+          title: '3 días — El countdown se acelera',
+          concept: 'Reel con montaje del tercer piso terminando de prepararse. Música que sube de intensidad. Texto final: "3 días."',
+          copy: '3 días. El tercer piso de American Outlet está casi listo. ¿Ya sabés qué viene? 🔶',
+          obj: 'Urgencia — contador en descenso acelerado' },
+        { time: '12:00pm', type: 'story', platforms: ['IG'],
+          title: 'Tag: ¿A quién le avisás?',
+          concept: 'Story limpia: "¿A quién le avisás que viene algo grande?" Con cuadro de respuestas para tagear amigos.',
+          copy: 'Tag a quien tiene que estar ahí el 15. 📍',
+          obj: 'Activar el boca a boca — shares orgánicos' },
+        { time: '7:00pm', type: 'story', platforms: ['IG'],
+          title: 'Behind the scenes: la preparación',
+          concept: 'Pequeño video detrás de cámara del proceso de armar el tercer piso. Cajas, perchas, organización. Real y crudo. Sin producción.',
+          copy: 'Detrás de lo que está por venir... 📦',
+          obj: 'Humanizar la marca — mostrar el esfuerzo real' }
+      ]
+    },
+    13: {
+      items: [
+        { time: '9:00am', type: 'post', platforms: ['IG', 'FB'],
+          title: 'MAÑANA. Todo cambia.',
+          concept: 'Post minimalista: "MAÑANA." en grande, naranja sobre negro. Nada más. La intriga hace el trabajo sola.',
+          copy: 'MAÑANA. 🔶 American Outlet. Ciudad Quesada.',
+          obj: 'Clímax de expectativa — penúltimo día antes del lanzamiento' },
+        { time: '10:00am', type: 'broadcast', platforms: ['WhatsApp'],
+          title: 'Broadcast: Pre-lanzamiento',
+          concept: 'Mensaje de WhatsApp a toda la lista de contactos. Tono íntimo, como si fuera un secreto que se comparte con pocos elegidos.',
+          copy: 'Algo grande está por pasar en American Outlet... Jueves 15 de mayo. Tercer piso. Todo nuevo. Mercadería americana directo de EE.UU. 🔶 Mañana lo contamos todo.',
+          obj: 'Alcance directo — calentar la base de clientes antes del gran día' },
+        { time: '8:00pm', type: 'reel', platforms: ['IG', 'TikTok'],
+          title: 'Teaser final: Mañana lo ves',
+          concept: 'Reel dramático de 15 segundos. Imágenes rápidas del tercer piso completamente listo. Fade a negro. "Mañana. 9am." Silencio total.',
+          copy: 'Mañana a las 9am. Llegás y lo ves todo. 👀 American Outlet · 3er piso.',
+          obj: 'Último empujón — máxima expectativa antes del lanzamiento' }
+      ]
+    },
+    14: {
+      items: [
+        { time: '8:00am', type: 'reel', platforms: ['IG', 'TikTok', 'FB'],
+          title: 'MAÑANA — El montaje épico',
+          concept: 'El reel más producido de la fase de expectativa. Montaje cinematográfico del tercer piso listo, música épica. "Mañana a las 9am. American Outlet abre el 3er piso." Publicar simultáneo en todos los canales.',
+          copy: 'MAÑANA. 9am. American Outlet abre el tercer piso. Ropa de marca americana. Precio outlet. Quincena. Cantidad limitada. ¿Estás listo? 🔶',
+          obj: 'Máxima visibilidad — día previo al lanzamiento' },
+        { time: '12:00pm', type: 'story', platforms: ['IG'],
+          title: 'Countdown final: horas',
+          concept: 'Story con countdown visual en tiempo real: "Faltan [X] horas para que todo cambie en American Outlet." Textura de reloj o timer.',
+          copy: 'El reloj corre. Mañana lo ves todo. ⏱️',
+          obj: 'Urgencia real — mantener el tope de expectativa todo el día' },
+        { time: '8:00pm', type: 'broadcast', platforms: ['WhatsApp'],
+          title: 'Broadcast: D-1',
+          concept: 'Último broadcast antes del lanzamiento. Directo y simple. Recordatorio con los detalles exactos del evento.',
+          copy: 'Mañana a las 9am abrimos el 3er piso de American Outlet Ciudad Quesada. Ropa americana de marca. Precios outlet. Solo por quincena. No llegués tarde. 🔶',
+          obj: 'Recordatorio final — asegurar la asistencia del día 1' }
+      ]
+    },
+    15: {
+      items: [
+        { time: '7:00am', type: 'reel', platforms: ['IG', 'TikTok', 'FB'],
+          title: '🔴 REEL HÉROE: Gran apertura',
+          concept: 'El reel más importante del mes. Apertura oficial del 3er piso. Filmado desde el momento en que se abre la puerta. Clientes entrando. Reacciones reales. Productos en primer plano. Música épica. PUBLICAR ANTES DE LAS 9AM sin falta.',
+          copy: 'AÑO NUEVO PARA SAN CARLOS. El tercer piso de American Outlet abrió hoy. Ropa americana de marca. Precio outlet. Quincena. El único outlet americano. 🔶 Llegás y lo ves.',
+          obj: 'Lanzamiento oficial — máxima distribución orgánica + pauta simultánea' },
+        { time: '9:00am', type: 'post', platforms: ['IG', 'FB'],
+          title: 'Post: Ya abrimos',
+          concept: 'Post fotográfico del tercer piso con clientes reales. Texto directo y contundente. "Ya abrimos." Sin adornos.',
+          copy: 'YA ABRIMOS. 📍 American Outlet · 3er piso · Ciudad Quesada. Hoy por quincena. 🔶',
+          obj: 'Confirmación de apertura — tráfico al local' },
+        { time: '10:00am', type: 'broadcast', platforms: ['WhatsApp'],
+          title: 'Broadcast: ABRIMOS',
+          concept: 'Broadcast de confirmación. Simple y contundente. "ABRIMOS." Con dirección si es posible.',
+          copy: 'ABRIMOS. American Outlet 3er piso. Ropa de marca americana. Hoy toda la quincena. Ciudad Quesada. Venite. 🔶',
+          obj: 'Activar clientes por WhatsApp — drive to store' },
+        { time: '3:00pm', type: 'story', platforms: ['IG'],
+          title: 'Reacciones de clientes reales',
+          concept: 'Stories de clientes mostrando lo que compraron, sus caras de emoción, reacciones genuinas. Sin guión, sin producción. Crudo y real. La mejor prueba social.',
+          copy: 'Esto es lo que está pasando adentro. 👀',
+          obj: 'Prueba social en tiempo real — motivar a quien no ha venido aún' },
+        { time: '6:00pm', type: 'reel', platforms: ['IG', 'TikTok'],
+          title: 'Así fue el día 1',
+          concept: 'Compilación del día. Ambiente, clientes, productos, reacciones genuinas. El resumen cinematográfico de la apertura. "Día 1. Gracias, San Carlos."',
+          copy: 'Día 1. Así amaneció el 3er piso de American Outlet. Mañana seguimos. 🔶',
+          obj: 'Cierre del día 1 — mantener el momentum hasta el día 2' }
+      ]
+    },
+    16: {
+      items: [
+        { time: '8:00am', type: 'reel', platforms: ['IG', 'TikTok'],
+          title: 'Top 3: Los más buscados del día 1',
+          concept: 'Reel mostrando los 3 productos que más pidió la gente el primer día. Filmado directamente en tienda, sin producción elaborada. Real y rápido.',
+          copy: 'Día 1 habló. Estos fueron los 3 más buscados. Todavía están disponibles. 👇',
+          obj: 'Prueba social + urgencia — lo popular se agota pronto' },
+        { time: '12:00pm', type: 'story', platforms: ['IG'],
+          title: '¿Cuál te llevás? A o B',
+          concept: 'Story comparativa con 2 productos distintos. Encuesta simple: A o B. El que gana se convierte en el protagonista del siguiente reel.',
+          copy: '¿A o B? Vos decidís cuál es el próximo reel. 👇',
+          obj: 'Engagament + co-creación de contenido' },
+        { time: '6:00pm', type: 'post', platforms: ['IG', 'FB'],
+          title: 'Todavía estás a tiempo',
+          concept: 'Post con los mejores productos aún disponibles. Tono de urgencia pero sin desesperación. "Todavía estás a tiempo de venir."',
+          copy: 'Todavía estás a tiempo. El tercer piso sigue abierto. 📍 Ciudad Quesada. 🔶',
+          obj: 'Drive to store — viernes de quincena es el día de más tráfico' }
+      ]
+    },
+    17: {
+      items: [
+        { time: '9:00am', type: 'reel', platforms: ['IG', 'TikTok', 'FB'],
+          title: 'Sábado de quincena en AO',
+          concept: 'La gente está viniendo. Mucho movimiento. Reel de ambiente real: filas, probadores, clientes felices, cajas llenas. Sábado de quincena al máximo.',
+          copy: 'Sábado de quincena en American Outlet. El tercer piso está full. 🔶 ¿Ya viniste?',
+          obj: 'Prueba social masiva — sábado es el día de mayor tráfico del mes' },
+        { time: '12:00pm', type: 'story', platforms: ['IG'],
+          title: '¿Ya viniste? CTA directo',
+          concept: '"¿Ya pasaste por el tercer piso?" Si responden que no, les preguntás por qué y los mandás para allá con la dirección.',
+          copy: '¿Ya viniste? ¿No? ¿Qué esperás? 📍',
+          obj: 'CTA directo — convertir curiosos en visitantes el mismo día' },
+        { time: '4:00pm', type: 'live', platforms: ['IG', 'FB'],
+          title: 'Live desde el 3er piso',
+          concept: 'Live de 20-30 minutos desde el piso de ventas. Mostrar productos en tiempo real, responder preguntas del chat, hacer de los seguidores parte de la experiencia. Terminar con CTA para que vengan durante la semana.',
+          copy: '¡Estamos en vivo desde el 3er piso! Mirá lo que tenemos y preguntanos lo que querás. 🔴',
+          obj: 'Alcance máximo del lanzamiento — interacción directa con la audiencia' }
+      ]
+    },
+    18: {
+      items: [
+        { time: '11:00am', type: 'post', platforms: ['IG', 'FB'],
+          title: 'Resumen del fin de semana de apertura',
+          concept: 'Post dominical con el resumen de los primeros 3 días de AO Revolution. Tono agradecido y emocionante. "Esto fue el fin de semana de apertura."',
+          copy: 'Gracias, San Carlos. El fin de semana de apertura fue histórico. El 3er piso sigue abierto. Seguimos toda la semana. 🔶',
+          obj: 'Cierre del lanzamiento + apertura de la fase de conversión' },
+        { time: '6:00pm', type: 'story', platforms: ['IG'],
+          title: 'Testimonial de cliente real',
+          concept: 'Story con el testimonio de un cliente real. Idealmente en video corto. "Me vine desde Pital y valió la pena." Auténtico, sin guión.',
+          copy: 'La gente habla. Esto es lo que dicen. 💬',
+          obj: 'Prueba social post-lanzamiento — reforzar la decisión de compra' }
+      ]
+    },
+    19: {
+      items: [
+        { time: '8:00am', type: 'reel', platforms: ['IG', 'TikTok'],
+          title: 'El favorito: Producto estrella #1',
+          concept: 'Reel dedicado al producto más vendido o más pedido de la semana de apertura. Precio visible, marca visible, talla visible. Todo claro, sin misterio.',
+          copy: 'Este fue el más pedido del fin de semana. Todavía hay. 📍 American Outlet, 3er piso.',
+          obj: 'Conversión — mostrar el best seller con stock disponible' },
+        { time: '6:00pm', type: 'story', platforms: ['IG'],
+          title: '¿Ya lo viste en tienda?',
+          concept: 'Story del producto estrella con pregunta directa. "¿Ya lo viste en tienda?" Si dicen que no, se les manda la ubicación.',
+          copy: '¿Ya lo viste en tienda? Si no, ya sabés dónde. 📍',
+          obj: 'Drive to store — conversión directa' }
+      ]
+    },
+    20: {
+      items: [
+        { time: '8:00am', type: 'post', platforms: ['IG', 'FB'],
+          title: 'Producto estrella #2: La marca habla',
+          concept: 'Post fotográfico del segundo producto más relevante. Foco en la marca, calidad de la fotografía, precio visible. La marca lo dice todo.',
+          copy: 'La marca lo dice todo. 🇺🇸 Disponible en American Outlet, 3er piso. Ciudad Quesada.',
+          obj: 'Construcción de valor de marca — autenticidad y origen' },
+        { time: '7:00pm', type: 'story', platforms: ['IG'],
+          title: 'Escasez: Quedan pocas unidades',
+          concept: 'Story directa de escasez: mostrar las tallas disponibles del producto estrella. "Quedan pocas unidades. Si lo querés, vení esta semana."',
+          copy: 'Quedan pocas unidades. ¿Cuál es tu talla? Vení antes que se acaben. 🔶',
+          obj: 'Urgencia por escasez — empujar la compra inmediata' }
+      ]
+    },
+    21: {
+      items: [
+        { time: '9:00am', type: 'reel', platforms: ['IG', 'TikTok'],
+          title: 'De EE.UU. directamente a vos',
+          concept: 'Reel mostrando la etiqueta original de EE.UU. del producto. Primer plano de la marca, el precio original en dólares, luego el precio outlet en colones. El contraste de precio es el gancho principal.',
+          copy: 'Precio original en EE.UU.: $X. Precio en American Outlet: ₡X. Marca real. 🇺🇸 El único outlet americano en San Carlos.',
+          obj: 'Superar la objeción de precio — demostrar el valor del outlet' },
+        { time: '6:00pm', type: 'story', platforms: ['IG'],
+          title: 'Encuesta: ¿De qué país vino?',
+          concept: 'Encuesta educativa con foto del producto. "¿De qué país vino esta pieza?" Opciones: A: EE.UU. B: Panamá C: China. La respuesta siempre es A.',
+          copy: '¿De dónde vino esta pieza? Adiviná. 🌎',
+          obj: 'Educación de marca — reforzar la narrativa de importación' }
+      ]
+    },
+    22: {
+      items: [
+        { time: '9:00am', type: 'reel', platforms: ['IG', 'TikTok', 'FB'],
+          title: 'El que llegó y arrasó',
+          concept: 'Reel del producto más vendido de la primera semana. Datos reales si es posible: "En 5 días casi no hay." Tono honesto y emocionante.',
+          copy: 'Llegó el jueves. Ya casi no hay. Este es el que arrasó en la primera semana de AO Revolution. 🔶',
+          obj: 'Urgencia por datos reales — conversión de la segunda semana' },
+        { time: '6:00pm', type: 'post', platforms: ['IG', 'FB'],
+          title: 'Semana 1: Lo que se fue y lo que queda',
+          concept: 'Post de balance de la primera semana. Lo que ya no hay vs lo que todavía está disponible. La transparencia genera confianza.',
+          copy: 'Primera semana de AO Revolution. Esto es lo que pasó. Y esto es lo que queda. 📊',
+          obj: 'Transparencia + urgencia — sentar las bases para la semana final' }
+      ]
+    },
+    23: {
+      items: [
+        { time: '9:00am', type: 'story', platforms: ['IG'],
+          title: 'Viernes Outfit: El look completo',
+          concept: 'Story mostrando un outfit completo armado con productos de American Outlet. Camisa + pantalón + zapatilla. Precio total del outfit vs precio original en EE.UU.',
+          copy: 'Outfit viernes: todo de American Outlet. Precio original en EE.UU.: $XXX. Precio AO: ₡XX. 🔶',
+          obj: 'Inspiración de compra — aumentar el ticket promedio por cliente' },
+        { time: '12:00pm', type: 'post', platforms: ['IG', 'FB'],
+          title: 'El combo perfecto',
+          concept: 'Foto editorial de un outfit completo con productos AO. Fondo limpio, buena luz. Cada pieza etiquetada con su precio. El look completo accesible.',
+          copy: 'El look completo. Todo en American Outlet. El único outlet americano en San Carlos. 🔶',
+          obj: 'Inspiración + ticket promedio — vender más piezas por visita' }
+      ]
+    },
+    24: {
+      items: [
+        { time: '10:00am', type: 'reel', platforms: ['IG', 'TikTok', 'FB'],
+          title: 'Sábado en American Outlet',
+          concept: 'Reel de ambiente del sábado. Clientes, movimiento, probadores, cajas. La tienda viva y activa. Sin necesidad de hablar de productos específicos. Solo mostrar que el lugar está lleno.',
+          copy: 'Sábado en American Outlet. Así está el 3er piso. 📍 Ciudad Quesada.',
+          obj: 'Prueba social del tráfico — FOMO del que no vino aún' },
+        { time: '3:00pm', type: 'story', platforms: ['IG'],
+          title: '¿Qué trajiste hoy?',
+          concept: 'Story preguntando a los clientes qué compraron ese día. Repostear las mejores respuestas. Crear comunidad alrededor de las compras en AO.',
+          copy: '¿Qué te trajiste hoy de American Outlet? Mostranos. 👇',
+          obj: 'UGC — contenido generado por clientes, gratis y auténtico' }
+      ]
+    },
+    25: {
+      items: [
+        { time: '12:00pm', type: 'post', platforms: ['IG', 'FB'],
+          title: 'Para los que no pudieron venir',
+          concept: 'Post dominical con resumen del inventario aún disponible. Para alcanzar a quien todavía no ha visitado la tienda. "Todavía estás a tiempo esta semana."',
+          copy: '¿No pudiste venir la semana pasada? El 3er piso todavía tiene. Te esperamos esta semana. 📍',
+          obj: 'Recuperar rezagados — ampliar el alcance de conversión' },
+        { time: '6:00pm', type: 'story', platforms: ['IG'],
+          title: 'Última oportunidad del mes',
+          concept: '"Esta semana es la última oportunidad de mayo. El inventario es limitado y no se repone." Tono directo sin exagerar.',
+          copy: 'Última semana de mayo. El inventario no es infinito. ¿Cuándo venís? 🔶',
+          obj: 'Urgencia temporal — activar las compras de la semana final' }
+      ]
+    },
+    26: {
+      items: [
+        { time: '8:00am', type: 'reel', platforms: ['IG', 'TikTok'],
+          title: 'Semana 2: Lo que queda',
+          concept: 'Reel honesto del inventario que todavía está disponible. Sin disimular. La escasez real es el mejor vendedor que existe.',
+          copy: 'Semana 2 de AO Revolution. Esto es lo que queda. Si lo querés, esta es tu última semana. 🔶',
+          obj: 'Urgencia real — la escasez visible activa compras inmediatas' },
+        { time: '12:00pm', type: 'broadcast', platforms: ['WhatsApp'],
+          title: 'Broadcast: Quedan días',
+          concept: 'Broadcast recordatorio de la última semana. Directo y sin drama. Solo los hechos del inventario disponible.',
+          copy: 'Quedan días. El inventario de AO Revolution se está yendo. ¿Ya viniste a American Outlet? El 3er piso te espera. 🔶',
+          obj: 'Reactivar base de WhatsApp — drive to store última semana' }
+      ]
+    },
+    27: {
+      items: [
+        { time: '9:00am', type: 'reel', platforms: ['IG', 'TikTok'],
+          title: '¿Qué querés ver en junio?',
+          concept: 'Reel de engagament anticipando junio. Mostrar que AO Revolution fue solo el principio de algo más grande. "Esto fue mayo. ¿Qué querés para junio?"',
+          copy: 'Mayo fue AO Revolution. ¿Qué querés para junio? Comentanos. 💬',
+          obj: 'Anticipación de junio + engagament profundo' },
+        { time: '6:00pm', type: 'story', platforms: ['IG'],
+          title: 'Story interactiva: Pedinos el producto',
+          concept: 'Story con cuadro de respuestas: "¿Qué producto de ropa de marca quisierías encontrar aquí?" Las respuestas informan la próxima importación.',
+          copy: '¿Qué producto te gustaría encontrar en American Outlet? Pedinos. 👇',
+          obj: 'Investigación de mercado + engagament — datos reales del cliente' }
+      ]
+    },
+    28: {
+      items: [
+        { time: '9:00am', type: 'post', platforms: ['IG', 'FB'],
+          title: 'Los que sí se movieron',
+          concept: 'Post honesto de los productos que más rotaron durante mayo. Escasez real comunicada con datos concretos. "Estos ya no están. Pero estos sí."',
+          copy: 'Esto ya no está. Pero esto sí. ¿Cuándo venís? 📍 American Outlet, 3er piso.',
+          obj: 'Urgencia por escasez real + drive to store del cierre de mes' },
+        { time: '7:00pm', type: 'story', platforms: ['IG'],
+          title: 'Ya quedan pocas tallas',
+          concept: 'Story mostrando la disponibilidad de tallas de los productos más populares. "Talla S: 2. Talla M: 1. Talla L: 0." Concreto y directo.',
+          copy: 'Ya quedan pocas tallas. ¿La tuya todavía está? Vení a ver antes de que se acabe. 🔶',
+          obj: 'Máxima urgencia — escasez específica por talla activa la compra' }
+      ]
+    },
+    29: {
+      items: [
+        { time: '8:00am', type: 'reel', platforms: ['IG', 'TikTok', 'FB'],
+          title: 'Antes de que se acabe',
+          concept: 'Reel final de urgencia. Tono épico y emocional. "Mayo se acaba. El inventario también. Esta es tu última oportunidad para llevarte ropa americana de marca a precio outlet."',
+          copy: 'Mayo se acaba. El inventario de AO Revolution también. Esta es tu última semana. 🔶 American Outlet · 3er piso · Ciudad Quesada.',
+          obj: 'Urgencia máxima — penúltimo empujón del mes' },
+        { time: '6:00pm', type: 'story', platforms: ['IG'],
+          title: '¿Cuándo venís?',
+          concept: 'Story directa: "¿Cuándo es tu última visita a American Outlet este mayo?" Con opciones: Mañana / Este fin de semana / Ya vine.',
+          copy: '¿Cuándo es tu última visita a American Outlet este mayo? 📍',
+          obj: 'Compromiso de visita — activar los últimos días del mes' }
+      ]
+    },
+    30: {
+      items: [
+        { time: '9:00am', type: 'post', platforms: ['IG', 'FB'],
+          title: 'Último momento',
+          concept: 'Post de cierre de mes. Tono de urgencia final. "Última semana de mayo. Último momento para llevarte ropa americana de marca."',
+          copy: 'Último momento. Mayo se va. El inventario también. ¿Venís este fin de semana? 🔶',
+          obj: 'Cierre de mes — máxima urgencia final' },
+        { time: '12:00pm', type: 'story', platforms: ['IG'],
+          title: '¿Qué te faltó comprar?',
+          concept: '"¿Qué producto no pudiste llevarte este mayo?" Las respuestas informan la próxima importación y crean anticipación de junio.',
+          copy: '¿Qué no pudiste llevarte este mayo? Decinos para junio. 💬',
+          obj: 'Investigación de mercado + anticipación de junio' },
+        { time: '6:00pm', type: 'broadcast', platforms: ['WhatsApp'],
+          title: 'Broadcast: Cierre de mayo',
+          concept: 'Último broadcast del mes. Urgencia + anticipo de junio. "Mayo se acaba. El inventario también. Y lo que viene en junio... vas a querer estar en la lista."',
+          copy: 'Mayo se acaba. El inventario de AO Revolution también. American Outlet te espera este fin de semana. Y lo que viene en junio... vas a querer estar en la lista. 🔶',
+          obj: 'Urgencia final + anticipo de junio — retener la base ganada' }
+      ]
+    },
+    31: {
+      items: [
+        { time: '10:00am', type: 'reel', platforms: ['IG', 'TikTok', 'FB'],
+          title: 'Cierre de mayo: Gracias, San Carlos',
+          concept: 'El reel de cierre del mes. Compilación cinematográfica de todo mayo: expectativa, apertura, clientes, momentos reales. "Gracias, San Carlos. Esto fue AO Revolution. Junio viene con todo."',
+          copy: 'Gracias, San Carlos. Esto fue mayo. Esto fue AO Revolution. Junio viene con todo. 🔶 American Outlet · El único outlet americano.',
+          obj: 'Cierre emocional del mes + anticipación de junio' },
+        { time: '12:00pm', type: 'post', platforms: ['IG', 'FB'],
+          title: 'Mayo 2026: Los números',
+          concept: 'Post resumen del mes con métricas reales (las que se puedan compartir). Tono celebratorio y agradecido. "Mayo fue histórico. Junio será mejor."',
+          copy: 'Mayo 2026: AO Revolution. Números, momentos y gratitud. El único outlet americano en San Carlos. 🔶',
+          obj: 'Prueba social + anticipación — cerrar el mes con impacto' },
+        { time: '6:00pm', type: 'story', platforms: ['IG'],
+          title: 'Junio viene con todo',
+          concept: '"Junio está por empezar. Y ya tenemos todo preparado para la próxima fase de AO Revolution." Sembrar expectativa para el siguiente mes.',
+          copy: 'Junio viene con todo. 🔶 ¿Estás en la lista?',
+          obj: 'Anticipación de junio — retener a la audiencia ganada en mayo' }
+      ]
+    }
+  };
+
+  /* ══ CALENDAR ENGINE ══ */
+  const START_OFFSET = 4; // May 1, 2026 = Thursday (Sun=0)
+  const TOTAL_DAYS = 31;
+  const DOW_LONG = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+  let selectedDay = null;
+
+  function getPhase(day) {
+    if (day >= 5 && day <= 14) return 'e';
+    if (day >= 15 && day <= 17) return 'l';
+    if (day >= 18) return 'c';
+    return 'none';
+  }
+
+  function getPhaseName(phase) {
+    return { e: 'Expectativa', l: 'Lanzamiento', c: 'Conversión', none: '' }[phase] || '';
+  }
+
+  function renderCalendar() {
+    const body = document.getElementById('cal-body');
+    body.innerHTML = '';
+
+    for (let i = 0; i < START_OFFSET; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'cal-cell empty';
+      body.appendChild(cell);
+    }
+
+    for (let day = 1; day <= TOTAL_DAYS; day++) {
+      const phase = getPhase(day);
+      const dayData = CALENDAR_DATA[day];
+      const hasContent = !!dayData;
+
+      const cell = document.createElement('div');
+      cell.className = 'cal-cell phase-' + phase + (hasContent ? ' has-content' : '');
+      cell.id = 'cal-cell-' + day;
+
+      const numEl = document.createElement('div');
+      numEl.className = 'cal-num';
+      numEl.textContent = day;
+      cell.appendChild(numEl);
+
+      if (hasContent) {
+        const dots = document.createElement('div');
+        dots.className = 'cal-dots';
+        dayData.items.forEach(function(item) {
+          const dot = document.createElement('div');
+          dot.className = 'cdot cdot-' + item.type;
+          dots.appendChild(dot);
+        });
+        cell.appendChild(dots);
+        cell.addEventListener('click', (function(d) {
+          return function() { openDay(d); };
+        })(day));
+      }
+
+      body.appendChild(cell);
+    }
+  }
+
+  function openDay(day) {
+    if (selectedDay !== null) {
+      const prev = document.getElementById('cal-cell-' + selectedDay);
+      if (prev) prev.classList.remove('selected');
+    }
+    selectedDay = day;
+    const cell = document.getElementById('cal-cell-' + day);
+    if (cell) cell.classList.add('selected');
+    renderDetail(CALENDAR_DATA[day], day);
+    document.getElementById('cal-modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCalModal() {
+    document.getElementById('cal-modal-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+    if (selectedDay !== null) {
+      const prev = document.getElementById('cal-cell-' + selectedDay);
+      if (prev) prev.classList.remove('selected');
+      selectedDay = null;
+    }
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('cal-modal-overlay')) closeCalModal();
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeCalModal();
+  });
+
+  function renderDetail(dayData, day) {
+    const container = document.getElementById('cal-modal-content');
+    const phase = getPhase(day);
+    const phaseName = getPhaseName(phase);
+    const dayIndex = (START_OFFSET + day - 1) % 7;
+    const dayName = DOW_LONG[dayIndex];
+    const count = dayData.items.length;
+
+    const typeLabels = { reel: 'Reel', post: 'Post', story: 'Story', live: 'Live', broadcast: 'Broadcast WA' };
+
+    const itemsHTML = dayData.items.map(function(item) {
+      const plats = item.platforms.map(function(p) {
+        return '<span class="det-plat">' + p + '</span>';
+      }).join('');
+      return '<div class="det-item">' +
+        '<div class="det-item-head">' +
+          '<span class="det-time">' + item.time + '</span>' +
+          '<span class="det-type dt-' + item.type + '">' + (typeLabels[item.type] || item.type) + '</span>' +
+          plats +
+        '</div>' +
+        '<div class="det-item-body">' +
+          '<div class="det-title">' + item.title + '</div>' +
+          '<div class="det-concept">' + item.concept + '</div>' +
+          '<div class="det-copy">' + item.copy + '</div>' +
+          '<div class="det-obj">' + item.obj + '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    const phaseTag = phase !== 'none'
+      ? '<span class="detail-phase dp-' + phase + '">' + phaseName + '</span>'
+      : '';
+
+    container.innerHTML =
+      '<div class="detail-head">' +
+        '<div class="detail-head-top">' +
+          '<span class="detail-date">' + dayName + ' ' + day + ' mayo</span>' +
+          phaseTag +
+        '</div>' +
+        '<div class="detail-count">' + count + ' ' + (count === 1 ? 'pieza de contenido' : 'piezas de contenido') + '</div>' +
+      '</div>' +
+      '<div class="detail-items">' + itemsHTML + '</div>';
+
+    document.getElementById('cal-modal').scrollTop = 0;
+  }
+
+  renderCalendar();
+</script>
+
+</body>
+</html>
