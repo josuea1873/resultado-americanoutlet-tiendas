@@ -151,10 +151,10 @@ export default function Dashboard() {
         <section id="overview" className="pt-8 block-section">
           <div className="mb-6">
             <h1 className="font-sora text-2xl font-bold text-[#0a0a0a] mb-1">
-              Diagnóstico Operativo · Administradores PDV
+              Reporte de Diagnóstico · American Outlet
             </h1>
             <p className="text-sm text-gray-500">
-              Mayo 2026 · {total} {total === 1 ? 'respuesta' : 'respuestas'} en vista
+              Elaborado por Bralto · Mayo 2026 · {total} {total === 1 ? 'punto de venta' : 'puntos de venta'} en vista
               {filter !== 'all' && <span> — filtrado por <strong>{FILTER_LABELS[filter]}</strong></span>}
             </p>
           </div>
@@ -162,14 +162,14 @@ export default function Dashboard() {
           {/* KPI Cards */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
             <KPICard
-              label="Respondentes"
+              label="PDVs analizados"
               value={total}
-              sub={`de ${responses.length} formularios totales`}
+              sub={`de ${responses.length} puntos de venta del grupo`}
             />
             <KPICard
               label="Completitud"
               value={`${completionRate}%`}
-              sub="preguntas respondidas"
+              sub="tasa de respuesta del equipo"
               color="#16a34a"
             />
             <KPICard
@@ -178,9 +178,9 @@ export default function Dashboard() {
               sub="Ciudad Quesada · Florencia · Fortuna"
             />
             <KPICard
-              label="Fecha"
+              label="Período"
               value="Mayo"
-              sub="2026 · datos en tiempo real"
+              sub="2026 · análisis actualizado"
               color="#6b7280"
             />
           </div>
@@ -188,7 +188,7 @@ export default function Dashboard() {
           {/* Respondentes */}
           <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm mb-6">
             <h3 className="text-xs font-mono uppercase tracking-widest text-gray-400 mb-4">
-              Respondentes en vista
+              Equipo participante
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               {filtered.map(r => (
@@ -213,38 +213,38 @@ export default function Dashboard() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             <InsightCard
               icon="📦"
-              title="Inventario muerto: dolor #1"
-              body="Mencionado en 3/4 PDVs como dolor principal. Capital atrapado que el marketing puede liberar."
+              title="Rotación de inventario: primera prioridad"
+              body="3 de 4 tiendas lo identifican como el área de mayor impacto. La estrategia de campaña arranca desde aquí."
               variant="alert"
             />
             <InsightCard
               icon="📱"
-              title="WhatsApp sin protocolo activo"
-              body="2/4 PDVs responden al día siguiente. Leads nocturnos se pierden todos los días."
+              title="Atención por WhatsApp: oportunidad inmediata"
+              body="2 tiendas atienden al día siguiente. Con automatización activa, cada consulta nocturna se convierte en lead."
               variant="alert"
             />
             <InsightCard
               icon="🔒"
-              title="Florencia y Fortuna sin acceso a redes"
-              body="Ninguna de las dos administradoras controla sus propios perfiles — alguien más los gestiona."
+              title="Acceso a redes: punto a centralizar"
+              body="Florencia y Fortuna operan sin acceso directo a sus perfiles. Consolidar esto acelera la ejecución de contenido."
               variant="alert"
             />
             <InsightCard
               icon="🎬"
-              title="'Qué llegó hoy': formato ganador"
-              body="Mencionado por 3/4 como el contenido que más visitas físicas genera. Costo bajo, impacto alto."
+              title="'Qué llegó hoy': el formato que convierte"
+              body="3 de 4 tiendas lo confirman como el contenido que más visitas físicas genera. Bajo costo, alto impacto."
               variant="positive"
             />
             <InsightCard
               icon="👗"
-              title="Ropa mujer: única categoría unánime"
-              body="Los 4 PDVs la mencionan como de las que más se mueve. Es el ancla de contenido del grupo."
+              title="Ropa mujer: categoría ancla del grupo"
+              body="Los 4 puntos de venta la destacan como la de mayor movimiento. Es el eje central de la estrategia de contenido."
               variant="positive"
             />
             <InsightCard
               icon="📊"
-              title="Métricas: la petición más repetida"
-              body="3/4 PDVs piden métricas claras de qué funciona. Ninguno sabe qué content convierte hoy."
+              title="Métricas: lo que el equipo necesita"
+              body="3 de 4 administradores piden visibilidad sobre qué está funcionando. El dashboard resuelve esto desde el día uno."
               variant="neutral"
             />
           </div>
@@ -509,10 +509,10 @@ export default function Dashboard() {
         {/* ── FOOTER ───────────────────────────────────── */}
         <footer className="mt-16 pt-8 border-t border-gray-200 text-center">
           <p className="font-mono text-xs text-gray-400">
-            Bralto · bralto.io · Discovery Operativo · American Outlet · Mayo 2026
+            Bralto · bralto.io · Reporte de Diagnóstico · American Outlet · Mayo 2026
           </p>
           <p className="font-mono text-xs text-gray-300 mt-1">
-            {responses.length} formularios · {responses.reduce((a, r) => a + r.answered, 0)} preguntas respondidas
+            {responses.length} puntos de venta · {responses.reduce((a, r) => a + r.answered, 0)} respuestas recopiladas
           </p>
         </footer>
 
