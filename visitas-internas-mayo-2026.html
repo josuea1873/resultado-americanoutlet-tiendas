@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visitas Internas Mayo 2026 — American Outlet × Bralto</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f5f5f5;
+    --black: #0a0a0a;
+    --dark: #1a1a1a;
+    --orange: #ff6b2b;
+    --orange-soft: rgba(255,107,43,0.08);
+    --orange-mid: rgba(255,107,43,0.15);
+    --gray-700: #555555;
+    --gray-500: #888888;
+    --gray-400: #aaaaaa;
+    --gray-200: #e5e5e5;
+    --gray-100: #f0f0f0;
+    --border: rgba(0,0,0,0.06);
+    --border-strong: rgba(0,0,0,0.1);
+    --green: #16a34a;
+    --green-soft: rgba(22,163,74,0.08);
+    --purple: #7c3aed;
+    --purple-soft: rgba(124,58,237,0.08);
+
+    /* personas */
+    --josue: #ff6b2b;
+    --josue-soft: rgba(255,107,43,0.10);
+    --ale: #7c3aed;
+    --ale-soft: rgba(124,58,237,0.10);
+    --christian: #0ea5e9;
+    --christian-soft: rgba(14,165,233,0.10);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--black);
+    font-family: 'Sora', sans-serif;
+    line-height: 1.6;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: var(--black);
+    color: white;
+    padding: 60px 40px 52px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% -20%, rgba(255,107,43,0.18) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--orange); margin-bottom: 18px; position: relative; z-index: 1;
+  }
+  .hero-title {
+    font-size: clamp(2rem, 6vw, 3.6rem);
+    font-weight: 800; line-height: 1; color: white;
+    margin-bottom: 8px; position: relative; z-index: 1;
+  }
+  .hero-title .accent { color: var(--orange); }
+  .hero-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.28); position: relative; z-index: 1;
+    margin-bottom: 40px;
+  }
+  .hero-chips {
+    display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
+    position: relative; z-index: 1;
+  }
+  .hero-chip {
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 16px; border-radius: 100px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .chip-josue { background: var(--josue-soft); color: var(--josue); border: 1px solid rgba(255,107,43,0.25); }
+  .chip-ale   { background: var(--ale-soft); color: #a78bfa; border: 1px solid rgba(124,58,237,0.25); }
+  .chip-christian { background: var(--christian-soft); color: #38bdf8; border: 1px solid rgba(14,165,233,0.25); }
+  .chip-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .chip-josue .chip-dot { background: var(--josue); }
+  .chip-ale .chip-dot { background: #a78bfa; }
+  .chip-christian .chip-dot { background: #38bdf8; }
+
+  /* ══ MINI CALENDAR ══ */
+  .cal-wrap {
+    max-width: 760px; margin: 36px auto 0; padding: 0 32px;
+  }
+  .cal-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.56rem; text-transform: uppercase; letter-spacing: 0.16em;
+    color: var(--gray-400); margin-bottom: 14px; text-align: center;
+  }
+  .cal-grid {
+    display: grid; grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+  .cal-dow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.48rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--gray-400); text-align: center; padding-bottom: 6px;
+  }
+  .cal-day {
+    aspect-ratio: 1; border-radius: 8px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; font-weight: 500; color: var(--gray-500);
+    background: var(--gray-100);
+    position: relative;
+  }
+  .cal-day.empty { background: transparent; }
+  .cal-day.today { border: 1.5px solid var(--orange); color: var(--orange); }
+  .cal-day.visit {
+    background: var(--orange); color: white; font-weight: 700;
+    cursor: default;
+  }
+  .cal-day.visit.launch { background: var(--orange); box-shadow: 0 0 0 3px rgba(255,107,43,0.35); }
+  .cal-day .visit-dot {
+    position: absolute; bottom: 3px;
+    width: 4px; height: 4px; border-radius: 50%; background: white; opacity: 0.8;
+  }
+
+  /* ══ BODY ══ */
+  .body-wrap { max-width: 760px; margin: 0 auto; padding: 40px 32px 60px; }
+
+  .section-intro {
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-strong);
+  }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.18em;
+    color: var(--orange); margin-bottom: 6px;
+  }
+  .section-title {
+    font-size: 1.25rem; font-weight: 700; color: var(--black); margin-bottom: 6px;
+  }
+  .section-desc {
+    font-size: 0.78rem; color: var(--gray-500); font-weight: 300; line-height: 1.7;
+  }
+
+  /* ══ VISITA CARDS ══ */
+  .visita-stack { display: flex; flex-direction: column; gap: 16px; }
+
+  .visita-card {
+    display: grid; grid-template-columns: 100px 1fr;
+    border-radius: 14px; border: 1px solid var(--border-strong);
+    overflow: hidden;
+  }
+  .visita-card.is-launch { border-color: var(--orange); }
+
+  .visita-date {
+    background: var(--black); color: white;
+    padding: 18px 10px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+    gap: 3px;
+  }
+  .visita-card.is-launch .visita-date { background: var(--orange); }
+
+  .v-dow { font-family: 'JetBrains Mono', monospace; font-size: 0.46rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.35); }
+  .v-dom { font-family: 'JetBrains Mono', monospace; font-size: 1.8rem; font-weight: 800; color: white; line-height: 1; }
+  .v-mes { font-family: 'JetBrains Mono', monospace; font-size: 0.44rem; color: rgba(255,255,255,0.25); text-transform: uppercase; }
+  .v-num {
+    margin-top: 10px;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.44rem;
+    font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.45);
+  }
+  .v-badge {
+    margin-top: 6px; padding: 3px 8px; border-radius: 100px;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.44rem;
+    font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+    text-align: center; line-height: 1.4;
+  }
+  .vb-pre     { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); }
+  .vb-launch  { background: rgba(255,255,255,0.2); color: white; }
+  .vb-post    { background: rgba(22,163,74,0.25); color: #86efac; }
+  .vb-cierre  { background: rgba(124,58,237,0.25); color: #c4b5fd; }
+
+  .visita-body { padding: 18px 22px; }
+  .visita-body h4 { font-size: 0.88rem; font-weight: 700; color: var(--black); margin-bottom: 14px; }
+
+  /* Asistentes */
+  .asistentes {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;
+  }
+  .asistente {
+    display: flex; align-items: center; gap: 5px;
+    padding: 3px 10px; border-radius: 100px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .a-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+  .a-josue   { background: var(--josue-soft); color: var(--josue); border: 1px solid rgba(255,107,43,0.2); }
+  .a-josue .a-dot { background: var(--josue); }
+  .a-ale     { background: var(--ale-soft); color: #a78bfa; border: 1px solid rgba(124,58,237,0.2); }
+  .a-ale .a-dot { background: #a78bfa; }
+  .a-christian { background: var(--christian-soft); color: #38bdf8; border: 1px solid rgba(14,165,233,0.2); }
+  .a-christian .a-dot { background: #38bdf8; }
+
+  /* Items por persona */
+  .persona-block { margin-bottom: 12px; }
+  .persona-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.48rem; text-transform: uppercase; letter-spacing: 0.1em;
+    font-weight: 700; margin-bottom: 5px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .pl-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+  .pl-josue   { color: var(--josue); }
+  .pl-josue .pl-dot { background: var(--josue); }
+  .pl-ale     { color: #a78bfa; }
+  .pl-ale .pl-dot { background: #a78bfa; }
+  .pl-christian { color: #38bdf8; }
+  .pl-christian .pl-dot { background: #38bdf8; }
+
+  .visita-items { display: flex; flex-direction: column; gap: 5px; margin-bottom: 0; }
+  .visita-item {
+    display: flex; gap: 9px; font-size: 0.75rem;
+    color: var(--gray-700); font-weight: 300; align-items: flex-start; line-height: 1.55;
+  }
+  .visita-item::before { content: '—'; color: var(--orange); font-weight: 600; flex-shrink: 0; padding-top: 1px; }
+  .visita-item strong { color: var(--black); font-weight: 600; }
+
+  .visita-entregable {
+    margin-top: 14px; padding: 8px 12px;
+    background: var(--orange-soft); border: 1px solid var(--orange-mid);
+    border-radius: 8px; font-size: 0.7rem; color: var(--orange); font-weight: 500;
+    line-height: 1.5;
+  }
+  .visita-entregable::before { content: 'Entregable · '; font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.06em; text-transform: uppercase; }
+
+  /* ══ LEYENDA ══ */
+  .leyenda {
+    margin-top: 32px; padding: 16px 20px;
+    border-radius: 12px; background: var(--surface);
+    border: 1px solid var(--border-strong);
+    display: flex; gap: 20px; flex-wrap: wrap; align-items: center;
+  }
+  .leyenda-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5rem; text-transform: uppercase; letter-spacing: 0.14em;
+    color: var(--gray-400); flex-shrink: 0;
+  }
+  .leyenda-items { display: flex; gap: 16px; flex-wrap: wrap; }
+  .leyenda-item {
+    display: flex; align-items: center; gap: 7px;
+    font-size: 0.68rem; color: var(--gray-700);
+  }
+  .l-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ══ PRINT BTN ══ */
+  .print-bar {
+    text-align: center; padding: 24px;
+    border-top: 1px solid var(--border);
+  }
+  .print-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 24px; border-radius: 10px;
+    background: var(--black); color: white;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    cursor: pointer; border: none;
+    transition: opacity 0.2s;
+  }
+  .print-btn:hover { opacity: 0.8; }
+
+  /* ══ FOOTER ══ */
+  .footer {
+    text-align: center; padding: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.52rem; color: var(--gray-400);
+    border-top: 1px solid var(--border);
+    letter-spacing: 0.06em;
+  }
+
+  /* ══ PRINT STYLES ══ */
+  @media print {
+    .print-bar { display: none; }
+    body { background: white; }
+    .hero { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .visita-card { break-inside: avoid; }
+    .visita-date { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .visita-entregable { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .asistente { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .cal-day.visit { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    @page { margin: 1cm 1.2cm; }
+  }
+
+  @media (max-width: 580px) {
+    .hero { padding: 44px 20px 36px; }
+    .visita-card { grid-template-columns: 76px 1fr; }
+    .body-wrap { padding: 28px 18px 48px; }
+    .cal-wrap { padding: 0 18px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">Bralto × American Outlet · Uso interno</div>
+  <div class="hero-title">Visitas<span class="accent"> ·</span><br>Mayo 2026</div>
+  <div class="hero-sub">4 visitas · AO Revolution · Calendario operativo</div>
+  <div class="hero-chips">
+    <div class="hero-chip chip-josue"><span class="chip-dot"></span>Josué Araya</div>
+    <div class="hero-chip chip-ale"><span class="chip-dot"></span>Ale</div>
+    <div class="hero-chip chip-christian"><span class="chip-dot"></span>Christian Vindas</div>
+  </div>
+</div>
+
+<!-- MINI CALENDAR -->
+<div class="cal-wrap" style="padding-top:32px;">
+  <div class="cal-label">Mayo 2026 — días de visita marcados</div>
+  <div class="cal-grid">
+    <!-- DOW headers -->
+    <div class="cal-dow">Lun</div>
+    <div class="cal-dow">Mar</div>
+    <div class="cal-dow">Mié</div>
+    <div class="cal-dow">Jue</div>
+    <div class="cal-dow">Vie</div>
+    <div class="cal-dow">Sáb</div>
+    <div class="cal-dow">Dom</div>
+    <!-- Week 1: May starts on Friday -->
+    <div class="cal-day empty"></div>
+    <div class="cal-day empty"></div>
+    <div class="cal-day empty"></div>
+    <div class="cal-day empty"></div>
+    <div class="cal-day today">01</div>
+    <div class="cal-day">02</div>
+    <div class="cal-day">03</div>
+    <!-- Week 2 -->
+    <div class="cal-day">04</div>
+    <div class="cal-day">05</div>
+    <div class="cal-day">06</div>
+    <div class="cal-day">07</div>
+    <div class="cal-day">08</div>
+    <div class="cal-day">09</div>
+    <div class="cal-day">10</div>
+    <!-- Week 3 -->
+    <div class="cal-day">11</div>
+    <div class="cal-day">12</div>
+    <div class="cal-day">13</div>
+    <div class="cal-day">14</div>
+    <div class="cal-day visit" title="Visita 1 — Pre-lanzamiento">08<div class="visit-dot"></div></div>
+    <div class="cal-day">09</div>
+    <div class="cal-day">10</div>
+  </div>
+  <!-- rebuild correct: May 2026 starts on Friday May 1 -->
+</div>
+
+<!-- rebuild mini-cal via JS -->
+<div class="cal-wrap" style="padding-top:0; padding-bottom:32px;">
+  <div class="cal-label">Mayo 2026 — días de visita marcados</div>
+  <div id="mini-cal" class="cal-grid">
+    <div class="cal-dow">Lun</div>
+    <div class="cal-dow">Mar</div>
+    <div class="cal-dow">Mié</div>
+    <div class="cal-dow">Jue</div>
+    <div class="cal-dow">Vie</div>
+    <div class="cal-dow">Sáb</div>
+    <div class="cal-dow">Dom</div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="body-wrap">
+
+  <div class="section-intro">
+    <div class="section-label">03 · Calendario interno</div>
+    <div class="section-title">Visitas al Proyecto · Mayo 2026</div>
+    <p class="section-desc">Una visita semanal con agenda definida, responsables claros y entregable por sesión. El objetivo es mantener el proyecto en carril, medir resultados en tiempo real y tomar decisiones rápidas sobre la marcha.</p>
+  </div>
+
+  <!-- LEYENDA PERSONAS -->
+  <div class="leyenda" style="margin-bottom: 24px; margin-top: 0;">
+    <div class="leyenda-label">Equipo</div>
+    <div class="leyenda-items">
+      <div class="leyenda-item"><div class="l-dot" style="background:var(--josue)"></div>Josué Araya — estrategia, producción audiovisual, dirección creativa</div>
+      <div class="leyenda-item"><div class="l-dot" style="background:#a78bfa"></div>Ale — operación, contenido, coordinación</div>
+      <div class="leyenda-item"><div class="l-dot" style="background:#38bdf8"></div>Christian Vindas — gerencia, decisiones de negocio</div>
+    </div>
+  </div>
+
+  <div class="visita-stack">
+
+    <!-- VISITA 1 -->
+    <div class="visita-card">
+      <div class="visita-date">
+        <div class="v-dow">Jueves</div>
+        <div class="v-dom">08</div>
+        <div class="v-mes">mayo</div>
+        <div class="v-num">Visita 1</div>
+        <div class="v-badge vb-pre">Pre-lanzamiento</div>
+      </div>
+      <div class="visita-body">
+        <h4>Preparación y alineación estratégica</h4>
+
+        <div class="asistentes">
+          <div class="asistente a-josue"><span class="a-dot"></span>Josué</div>
+          <div class="asistente a-ale"><span class="a-dot"></span>Ale</div>
+          <div class="asistente a-christian"><span class="a-dot"></span>Christian</div>
+        </div>
+
+        <div class="persona-block">
+          <div class="persona-label pl-josue"><span class="pl-dot"></span>Josué</div>
+          <div class="visita-items">
+            <div class="visita-item">Verificar estado físico del 3er piso — ¿listo para el lanzamiento del 15?</div>
+            <div class="visita-item">Confirmar con Christian los 3–5 productos estrella del reel de lanzamiento</div>
+            <div class="visita-item">Revisar setup técnico: GTM, píxel de Meta y Google Ads activos y validados</div>
+            <div class="visita-item">Alinear el mensaje del broadcast de WhatsApp para el día 13 (expectativa previa)</div>
+          </div>
+        </div>
+
+        <div class="persona-block">
+          <div class="persona-label pl-ale"><span class="pl-dot"></span>Ale</div>
+          <div class="visita-items">
+            <div class="visita-item">Brief al creador de contenido: revisar calendario semana 1 y 2, resolver dudas de concepto</div>
+            <div class="visita-item">Confirmar nombre final de la campaña: <strong>AO Revolution</strong> / variante si hay preferencia</div>
+            <div class="visita-item">Verificar que todas las piezas gráficas de semana 1 estén aprobadas y listas</div>
+          </div>
+        </div>
+
+        <div class="persona-block">
+          <div class="persona-label pl-christian"><span class="pl-dot"></span>Christian</div>
+          <div class="visita-items">
+            <div class="visita-item">Aprobación del concepto de campaña y productos estrella</div>
+            <div class="visita-item">Confirmar presupuesto de pauta para la semana del lanzamiento</div>
+          </div>
+        </div>
+
+        <div class="visita-entregable">Concepto aprobado · productos estrella confirmados · setup técnico validado</div>
+      </div>
+    </div>
+
+    <!-- VISITA 2 -->
+    <div class="visita-card is-launch">
+      <div class="visita-date">
+        <div class="v-dow">Jueves</div>
+        <div class="v-dom">15</div>
+        <div class="v-mes">mayo</div>
+        <div class="v-num">Visita 2</div>
+        <div class="v-badge vb-launch">Lanzamiento</div>
+      </div>
+      <div class="visita-body">
+        <h4>Presencia en tienda · Gran día AO Revolution</h4>
+
+        <div class="asistentes">
+          <div class="asistente a-josue"><span class="a-dot"></span>Josué</div>
+          <div class="asistente a-ale"><span class="a-dot"></span>Ale</div>
+          <div class="asistente a-christian"><span class="a-dot"></span>Christian</div>
+        </div>
+
+        <div class="persona-block">
+          <div class="persona-label pl-josue"><span class="pl-dot"></span>Josué</div>
+          <div class="visita-items">
+            <div class="visita-item">Presencia física en AO1 desde temprano — dirección del reel de lanzamiento</div>
+            <div class="visita-item">Confirmar que el Reel Héroe esté publicado antes de las 9am</div>
+            <div class="visita-item">Capturar reacciones genuinas de los primeros clientes para usar como contenido ese mismo día</div>
+            <div class="visita-item">Revisar en tiempo real el desempeño inicial de campañas (CTR, alcance, mensajes)</div>
+          </div>
+        </div>
+
+        <div class="persona-block">
+          <div class="persona-label pl-ale"><span class="pl-dot"></span>Ale</div>
+          <div class="visita-items">
+            <div class="visita-item">Verificar que campañas Meta y Google estén corriendo correctamente desde las primeras horas</div>
+            <div class="visita-item">Supervisar el envío del broadcast de WhatsApp a las 10:00am</div>
+            <div class="visita-item">Documentar el día: fotos del piso, del equipo, del ambiente — material para contenido semana 3</div>
+          </div>
+        </div>
+
+        <div class="persona-block">
+          <div class="persona-label pl-christian"><span class="pl-dot"></span>Christian</div>
+          <div class="visita-items">
+            <div class="visita-item">Disponible en tienda para validar productos, precios visibles y mensajes de comunicación</div>
+            <div class="visita-item">Decisión en campo si hay que ajustar algo del 3er piso antes de las primeras fotos</div>
+          </div>
+        </div>
+
+        <div class="visita-entregable">Reel publicado · campañas activas · broadcast enviado · primeras métricas del día</div>
+      </div>
+    </div>
+
+    <!-- VISITA 3 -->
+    <div class="visita-card">
+      <div class="visita-date">
+        <div class="v-dow">Jueves</div>
+        <div class="v-dom">22</div>
+        <div class="v-mes">mayo</div>
+        <div class="v-num">Visita 3</div>
+        <div class="v-badge vb-post">Post-lanzamiento</div>
+      </div>
+      <div class="visita-body">
+        <h4>Primera semana post-lanzamiento · revisión de resultados</h4>
+
+        <div class="asistentes">
+          <div class="asistente a-josue"><span class="a-dot"></span>Josué</div>
+          <div class="asistente a-ale"><span class="a-dot"></span>Ale</div>
+          <div class="asistente a-christian"><span class="a-dot"></span>Christian</div>
+        </div>
+
+        <div class="persona-block">
+          <div class="persona-label pl-josue"><span class="pl-dot"></span>Josué</div>
+          <div class="visita-items">
+            <div class="visita-item">Revisar métricas digitales: alcance del reel, seguidores nuevos, mensajes WhatsApp, clicks en campañas</div>
+            <div class="visita-item">Ajuste de campañas según datos reales: reasignar presupuesto a la audiencia que mejor respondió</div>
+            <div class="visita-item">Brief al creador para semana 3: confirmar productos #1 y #2 basados en rotación real</div>
+          </div>
+        </div>
+
+        <div class="persona-block">
+          <div class="persona-label pl-ale"><span class="pl-dot"></span>Ale</div>
+          <div class="visita-items">
+            <div class="visita-item">Revisar el feedback de encargados de Florencia y Fortuna — ¿cómo va el impacto en las otras sucursales?</div>
+            <div class="visita-item">Revisión de inventario: ¿qué se está agotando? → convertir escasez real en contenido de urgencia semana 3</div>
+            <div class="visita-item">Coordinar con el creador los cambios de enfoque para la semana siguiente</div>
+          </div>
+        </div>
+
+        <div class="persona-block">
+          <div class="persona-label pl-christian"><span class="pl-dot"></span>Christian</div>
+          <div class="visita-items">
+            <div class="visita-item"><strong>Métricas de ventas:</strong> ¿cuánto se vendió del 15 al 21? ¿Qué productos rotaron y cuáles no?</div>
+            <div class="visita-item">Validar si se necesita mover mercadería entre tiendas para aprovechar el momentum</div>
+          </div>
+        </div>
+
+        <div class="visita-entregable">Reporte de primera semana · campañas ajustadas · brief creativo semana 3 entregado</div>
+      </div>
+    </div>
+
+    <!-- VISITA 4 -->
+    <div class="visita-card">
+      <div class="visita-date">
+        <div class="v-dow">Jueves</div>
+        <div class="v-dom">29</div>
+        <div class="v-mes">mayo</div>
+        <div class="v-num">Visita 4</div>
+        <div class="v-badge vb-cierre">Cierre de mes</div>
+      </div>
+      <div class="visita-body">
+        <h4>Cierre de mayo · planeación de junio</h4>
+
+        <div class="asistentes">
+          <div class="asistente a-josue"><span class="a-dot"></span>Josué</div>
+          <div class="asistente a-ale"><span class="a-dot"></span>Ale</div>
+          <div class="asistente a-christian"><span class="a-dot"></span>Christian</div>
+        </div>
+
+        <div class="persona-block">
+          <div class="persona-label pl-josue"><span class="pl-dot"></span>Josué</div>
+          <div class="visita-items">
+            <div class="visita-item">¿Qué piezas de contenido generaron visitas físicas medibles? Identificar los formatos a replicar en junio</div>
+            <div class="visita-item">Definir el concepto de junio: ¿continuación de AO Revolution o nueva campaña?</div>
+            <div class="visita-item">Revisar resultados de la story interactiva del 27 mayo — qué pidió la audiencia</div>
+          </div>
+        </div>
+
+        <div class="persona-block">
+          <div class="persona-label pl-ale"><span class="pl-dot"></span>Ale</div>
+          <div class="visita-items">
+            <div class="visita-item">Preparar el resumen ejecutivo de mayo: tráfico digital, leads captados, seguidores ganados, inversión vs resultados</div>
+            <div class="visita-item">Estado del inventario post-lanzamiento: ¿qué sigue disponible para junio?</div>
+            <div class="visita-item">Propuesta preliminar de calendario de contenido para junio</div>
+          </div>
+        </div>
+
+        <div class="persona-block">
+          <div class="persona-label pl-christian"><span class="pl-dot"></span>Christian</div>
+          <div class="visita-items">
+            <div class="visita-item"><strong>Métricas finales de mayo:</strong> ventas totales vs objetivo del mes</div>
+            <div class="visita-item">Alineación sobre prioridades Q3: ¿hay eventos, fechas clave o mercadería nueva proyectada?</div>
+            <div class="visita-item">¿Cuándo llega el próximo contenedor? Definir eje de campaña en base a disponibilidad</div>
+          </div>
+        </div>
+
+        <div class="visita-entregable">Resumen ejecutivo de mayo · concepto de junio aprobado · calendario preliminar entregado</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- LEYENDA TIPOS -->
+  <div class="leyenda">
+    <div class="leyenda-label">Tipo</div>
+    <div class="leyenda-items">
+      <div class="leyenda-item"><div class="l-dot" style="background:#555"></div>Pre-lanzamiento — alineación y preparación</div>
+      <div class="leyenda-item"><div class="l-dot" style="background:var(--orange)"></div>Lanzamiento — presencia física en tienda</div>
+      <div class="leyenda-item"><div class="l-dot" style="background:#86efac"></div>Post-lanzamiento — revisión y ajuste</div>
+      <div class="leyenda-item"><div class="l-dot" style="background:#c4b5fd"></div>Cierre de mes — reporte y planificación</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- PRINT BTN -->
+<div class="print-bar">
+  <button class="print-btn" onclick="window.print()">
+    Exportar como PDF
+  </button>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Bralto · bralto.io · Calendario interno de visitas · American Outlet · Mayo 2026 · Uso interno del equipo
+</div>
+
+<script>
+  // Build mini calendar dynamically
+  (function() {
+    const cal = document.getElementById('mini-cal');
+    const visitDays = { 8: 'V1', 15: 'V2 · Lanzamiento', 22: 'V3', 29: 'V4' };
+    const today = 4; // May 4
+
+    // May 2026: starts on Friday (index 4 in Mon-based week)
+    const startOffset = 4; // 0=Mon … 6=Sun
+    const daysInMonth = 31;
+
+    // Empty cells before May 1
+    for (let i = 0; i < startOffset; i++) {
+      const el = document.createElement('div');
+      el.className = 'cal-day empty';
+      cal.appendChild(el);
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const el = document.createElement('div');
+      const isVisit = visitDays[d];
+      const isToday = d === today;
+      const isLaunch = d === 15;
+
+      if (isVisit) {
+        el.className = 'cal-day visit' + (isLaunch ? ' launch' : '');
+        el.title = visitDays[d];
+        el.innerHTML = String(d).padStart(2,'0') + '<div class="visit-dot"></div>';
+      } else if (isToday) {
+        el.className = 'cal-day today';
+        el.textContent = String(d).padStart(2,'0');
+      } else {
+        el.className = 'cal-day';
+        el.textContent = String(d).padStart(2,'0');
+      }
+      cal.appendChild(el);
+    }
+
+    // Remove the static duplicate calendar
+    const oldWraps = document.querySelectorAll('.cal-wrap');
+    if (oldWraps.length > 1) oldWraps[0].remove();
+  })();
+</script>
+
+</body>
+</html>
