@@ -569,24 +569,27 @@
   }
   .cal-cell:nth-child(7n) { border-right: none; }
   .cal-cell.empty { background: var(--surface); cursor: default; }
-  .cal-cell.has-content { cursor: pointer; }
-  .cal-cell.has-content:hover { background: var(--gray-100); }
+  .cal-cell.has-content { cursor: pointer; background: #fafafa; }
+  .cal-cell.has-content:hover { background: var(--orange-soft); }
   .cal-cell.selected { background: var(--black) !important; }
   .cal-cell.selected .cal-num { color: white; }
-  .cal-cell.selected .cdot { opacity: 0.35; }
+  .cal-cell.selected .cdot { opacity: 0.5; }
 
-  .cal-cell.phase-e { border-top-color: var(--black); }
-  .cal-cell.phase-l { border-top-color: var(--orange); }
-  .cal-cell.phase-c { border-top-color: var(--gray-400); }
+  .cal-cell.phase-e { border-top-color: var(--black); border-top-width: 3px; }
+  .cal-cell.phase-l { border-top-color: var(--orange); border-top-width: 3px; }
+  .cal-cell.phase-c { border-top-color: var(--gray-400); border-top-width: 3px; }
 
   .cal-num { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 700; color: var(--black); line-height: 1; }
   .cal-cell.phase-none .cal-num { color: var(--gray-400); }
   .cal-cell.empty .cal-num { display: none; }
 
-  .cal-dots { display: flex; gap: 3px; flex-wrap: wrap; }
-  .cdot { width: 5px; height: 5px; border-radius: 50%; background: var(--gray-400); flex-shrink: 0; }
+  .cal-dots { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 3px; }
+  .cdot { width: 7px; height: 7px; border-radius: 50%; background: var(--gray-200); flex-shrink: 0; }
   .cdot-reel { background: var(--orange); }
-  .cdot-broadcast { background: var(--black); }
+  .cdot-post { background: var(--black); }
+  .cdot-story { background: var(--gray-500); }
+  .cdot-live { background: var(--green); }
+  .cdot-broadcast { background: var(--purple); }
 
   /* ── Modal ── */
   .cal-modal-overlay {
@@ -701,10 +704,10 @@
 
     <div class="cal-legend">
       <span class="leg-item"><span class="leg-dot" style="background:var(--orange)"></span>Reel</span>
-      <span class="leg-item"><span class="leg-dot"></span>Post</span>
-      <span class="leg-item"><span class="leg-dot"></span>Story</span>
-      <span class="leg-item"><span class="leg-dot"></span>Live</span>
-      <span class="leg-item"><span class="leg-dot" style="background:var(--black)"></span>Broadcast WA</span>
+      <span class="leg-item"><span class="leg-dot" style="background:var(--black)"></span>Post</span>
+      <span class="leg-item"><span class="leg-dot" style="background:var(--gray-500)"></span>Story</span>
+      <span class="leg-item"><span class="leg-dot" style="background:var(--green)"></span>Live</span>
+      <span class="leg-item"><span class="leg-dot" style="background:var(--purple)"></span>Broadcast WA</span>
     </div>
     <div class="phase-legend">
       <span class="pl-item pl-e">Expectativa · 5–14 mayo</span>
@@ -2073,7 +2076,7 @@
   };
 
   /* ══ CALENDAR ENGINE ══ */
-  const START_OFFSET = 4; // May 1, 2026 = Thursday (Sun=0)
+  const START_OFFSET = 5; // May 1, 2026 = Friday (Sun=0, Mon=1, ..., Fri=5)
   const TOTAL_DAYS = 31;
   const DOW_LONG = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
   let selectedDay = null;
