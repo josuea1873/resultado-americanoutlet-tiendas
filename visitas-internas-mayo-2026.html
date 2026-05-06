@@ -60,6 +60,50 @@
     background: radial-gradient(ellipse at 50% -20%, rgba(255,107,43,0.18) 0%, transparent 60%);
     pointer-events: none;
   }
+  /* ── Navegación global ── */
+  .gnav-wrap {
+    position: fixed; bottom: 24px; left: 24px; z-index: 300;
+    display: flex; flex-direction: column-reverse; align-items: flex-start; gap: 8px;
+  }
+  .gnav-toggle {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--black); color: white;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+    font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    border: none; border-radius: 100px; padding: 11px 18px;
+    cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    transition: background 0.15s; line-height: 1;
+  }
+  .gnav-toggle:hover, .gnav-toggle.open { background: var(--orange); }
+  .gnav-panel {
+    background: white; border: 1px solid var(--border-strong);
+    border-radius: 14px; padding: 8px; min-width: 230px;
+    box-shadow: 0 8px 36px rgba(0,0,0,0.13);
+    opacity: 0; transform: translateY(10px) scale(0.97);
+    pointer-events: none; transition: opacity 0.15s, transform 0.15s;
+  }
+  .gnav-panel.open { opacity: 1; transform: none; pointer-events: all; }
+  .gnav-panel-title {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.48rem;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gray-400); padding: 6px 10px 10px;
+    border-bottom: 1px solid var(--border); margin-bottom: 4px;
+  }
+  .gnav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px; border-radius: 8px; width: 100%;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+    font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--black); text-decoration: none;
+    border: none; background: none; cursor: pointer; text-align: left;
+    transition: background 0.1s, color 0.1s;
+  }
+  .gnav-item:hover { background: var(--orange-soft); color: var(--orange); }
+  .gnav-item.is-active { background: var(--black); color: white; cursor: default; pointer-events: none; }
+  .gnav-num { font-size: 0.48rem; color: var(--gray-400); min-width: 18px; }
+  .gnav-item.is-active .gnav-num { color: rgba(255,255,255,0.35); }
+  .gnav-sep { height: 1px; background: var(--border); margin: 4px 0; }
+
   .hero-label {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase;
@@ -663,7 +707,47 @@
     const oldWraps = document.querySelectorAll('.cal-wrap');
     if (oldWraps.length > 1) oldWraps[0].remove();
   })();
+
+  /* ── Navegación global ── */
+  function gnavToggle() {
+    var panel = document.getElementById('gnav-panel');
+    var toggle = document.getElementById('gnav-toggle');
+    panel.classList.toggle('open');
+    toggle.classList.toggle('open');
+  }
+
+  document.addEventListener('click', function(e) {
+    var wrap = document.getElementById('gnav-wrap');
+    if (wrap && !wrap.contains(e.target)) {
+      document.getElementById('gnav-panel').classList.remove('open');
+      document.getElementById('gnav-toggle').classList.remove('open');
+    }
+  });
 </script>
+
+<!-- NAVEGACIÓN GLOBAL -->
+<div class="gnav-wrap" id="gnav-wrap">
+  <button class="gnav-toggle" id="gnav-toggle" onclick="gnavToggle()">⊞ &nbsp;Ir a</button>
+  <div class="gnav-panel" id="gnav-panel">
+    <div class="gnav-panel-title">Navegar</div>
+    <a class="gnav-item" href="calendario-mayo-2026.html#pub">
+      <span class="gnav-num">01</span> Publicaciones
+    </a>
+    <a class="gnav-item" href="calendario-mayo-2026.html#camp">
+      <span class="gnav-num">02</span> Campañas
+    </a>
+    <a class="gnav-item" href="calendario-mayo-2026.html#vis">
+      <span class="gnav-num">03</span> Visitas (calendario)
+    </a>
+    <a class="gnav-item" href="calendario-mayo-2026.html#ent">
+      <span class="gnav-num">04</span> Entregables
+    </a>
+    <div class="gnav-sep"></div>
+    <a class="gnav-item is-active" href="#">
+      <span class="gnav-num">↗</span> Visitas detalle
+    </a>
+  </div>
+</div>
 
 </body>
 </html>
