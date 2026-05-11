@@ -591,6 +591,65 @@
   .cdot-live { background: var(--green); }
   .cdot-broadcast { background: var(--purple); }
 
+  /* ── Strategy Brief Panel ── */
+  .strat-panel {
+    background: linear-gradient(135deg, #fafafa 0%, white 100%);
+    border: 1px solid var(--border-strong); border-radius: 14px;
+    padding: 24px; margin-bottom: 32px;
+  }
+  .strat-head {
+    display: flex; align-items: baseline; gap: 12px;
+    margin-bottom: 18px; padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .strat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--orange); font-weight: 700;
+  }
+  .strat-title { font-size: 0.92rem; font-weight: 700; color: var(--black); }
+  .strat-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    margin-bottom: 18px;
+  }
+  .strat-thread {
+    padding: 14px 16px; background: white;
+    border: 1px solid var(--border); border-radius: 10px;
+    border-left: 3px solid var(--orange);
+  }
+  .strat-thread:nth-child(2) { border-left-color: var(--black); }
+  .strat-thread:nth-child(3) { border-left-color: var(--green); }
+  .strat-thread-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5rem; letter-spacing: 0.16em;
+    color: var(--gray-400); margin-bottom: 4px;
+  }
+  .strat-thread-name { font-size: 0.78rem; font-weight: 700; color: var(--black); margin-bottom: 6px; line-height: 1.3; }
+  .strat-thread-desc { font-size: 0.66rem; color: var(--gray-700); line-height: 1.55; font-weight: 300; }
+  .strat-ops {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
+  }
+  .strat-op {
+    padding: 12px 14px; background: var(--surface);
+    border-radius: 8px; border-left: 2px solid var(--orange);
+  }
+  .strat-op-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.48rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gray-500); margin-bottom: 4px; font-weight: 700;
+  }
+  .strat-op-text { font-size: 0.68rem; color: var(--black); line-height: 1.5; }
+  .strat-op-text code {
+    background: var(--orange-soft); color: var(--orange);
+    padding: 1px 6px; border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700;
+  }
+  @media (max-width: 720px) {
+    .strat-grid { grid-template-columns: 1fr; gap: 10px; }
+    .strat-ops { grid-template-columns: 1fr; }
+    .strat-panel { padding: 18px; }
+  }
+
   /* ── Navegación global ── */
   .gnav-wrap {
     position: fixed; bottom: 24px; left: 24px; z-index: 300;
@@ -693,17 +752,45 @@
   .det-obj { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.06em; }
 
   @media (max-width: 600px) {
-    .cal-cell { min-height: 56px; padding: 7px 6px 6px; }
-    .cal-num { font-size: 0.64rem; }
-    .cal-headers div { font-size: 0.46rem; padding: 8px 2px; }
+    .cal-cell { min-height: 68px; padding: 8px 6px 6px; }
+    .cal-num { font-size: 0.78rem; }
+    .cal-headers div { font-size: 0.5rem; padding: 9px 2px; }
+    .cdot { width: 9px; height: 9px; }
+
+    /* Modal mobile = bottom sheet a pantalla completa */
     .cal-modal-overlay { padding: 0; align-items: flex-end; }
-    .cal-modal { border-bottom-left-radius: 0; border-bottom-right-radius: 0; max-height: 88vh; max-width: 100%; }
+    .cal-modal {
+      border-radius: 16px 16px 0 0;
+      max-height: 92vh; max-width: 100%; width: 100%;
+      padding-bottom: env(safe-area-inset-bottom, 0);
+    }
+    .cal-modal-close {
+      position: sticky; top: 0; right: 0;
+      background: white; width: 100%;
+      text-align: right; padding: 14px 18px 10px;
+      font-size: 0.72rem; color: var(--black);
+      border-bottom: 1px solid var(--border);
+      z-index: 10;
+    }
+    .detail-head { padding: 14px 18px 14px; }
+    .detail-date { font-size: 1.1rem; }
+    .detail-count { font-size: 0.6rem; }
+    .detail-items { padding: 6px 18px 28px; }
+    .det-item { padding: 18px 0; }
+    .det-title { font-size: 0.92rem; line-height: 1.35; }
+    .det-concept { font-size: 0.8rem; line-height: 1.6; }
+    .det-copy { font-size: 0.8rem; line-height: 1.55; padding: 10px 12px; background: var(--orange-soft); border-left: 3px solid var(--orange); border-radius: 6px; }
+    .det-obj { font-size: 0.54rem; padding-top: 4px; }
+    .det-item-head { flex-wrap: wrap; gap: 7px 8px; }
+    .det-time { font-size: 0.68rem; }
+    .det-type { font-size: 0.56rem; padding: 3px 7px; background: var(--surface); border-radius: 4px; }
+    .det-plat { font-size: 0.52rem; }
   }
 
   @media (max-width: 380px) {
-    .cal-cell { min-height: 46px; padding: 6px 4px 4px; gap: 3px; }
-    .cal-num { font-size: 0.58rem; }
-    .cdot { width: 4px; height: 4px; }
+    .cal-cell { min-height: 56px; padding: 6px 4px 4px; gap: 3px; }
+    .cal-num { font-size: 0.7rem; }
+    .cdot { width: 7px; height: 7px; }
   }
 </style>
 </head>
@@ -715,13 +802,13 @@
   <h1 class="hero-title">AO <span class="accent">Revolution</span></h1>
   <p class="hero-tagline">El único outlet americano · San Carlos · Costa Rica</p>
   <div class="hero-stats">
-    <div class="hero-stat"><span class="hero-stat-num">10</span><span class="hero-stat-label">días de expectativa</span></div>
+    <div class="hero-stat"><span class="hero-stat-num">17</span><span class="hero-stat-label">días de expectativa</span></div>
     <div class="hero-divider"></div>
-    <div class="hero-stat"><span class="hero-stat-num">15</span><span class="hero-stat-label">mayo · lanzamiento</span></div>
+    <div class="hero-stat"><span class="hero-stat-num">22</span><span class="hero-stat-label">mayo · apertura</span></div>
     <div class="hero-divider"></div>
-    <div class="hero-stat"><span class="hero-stat-num">26</span><span class="hero-stat-label">piezas de contenido</span></div>
+    <div class="hero-stat"><span class="hero-stat-num">100+</span><span class="hero-stat-label">piezas de contenido</span></div>
     <div class="hero-divider"></div>
-    <div class="hero-stat"><span class="hero-stat-num">3</span><span class="hero-stat-label">fases estratégicas</span></div>
+    <div class="hero-stat"><span class="hero-stat-num">3</span><span class="hero-stat-label">PDV activados</span></div>
   </div>
 </header>
 
@@ -745,6 +832,59 @@
       <div class="s-label">01 · Calendario de contenido</div>
       <h2 class="s-title">Mayo 2026 — Liquidation Outlet × AO Revolution</h2>
       <p class="s-desc">Reactivación agresiva de los 3 PDV con eje en el lanzamiento de Liquidation Outlet (3er piso AO1, 22 de mayo). Mauro · 5 stories/día. Posteos alternados 1-2 por día. 5 reels orgánicos/semana. 4 reels cinematográficos/mes (Josu). Hacé click en cualquier día para ver el plan exacto.</p>
+    </div>
+
+    <!-- ══ STRATEGY BRIEF MACRO ══ -->
+    <div class="strat-panel">
+      <div class="strat-head">
+        <span class="strat-label">Plan macro</span>
+        <span class="strat-title">3 hilos narrativos + sistemas operativos</span>
+      </div>
+
+      <div class="strat-grid">
+        <div class="strat-thread">
+          <div class="strat-thread-num">Hilo 01 · Producto</div>
+          <div class="strat-thread-name">Liquidation Outlet</div>
+          <div class="strat-thread-desc">Lanzamiento del 3er piso AO1 el 22 de mayo. La Mercadería TOP, marcas americanas reales. Eje del mes. Cinematográficos #1-4 y picos de pauta caen acá.</div>
+        </div>
+        <div class="strat-thread">
+          <div class="strat-thread-num">Hilo 02 · Audiencia</div>
+          <div class="strat-thread-name">Reactivación de los 178K</div>
+          <div class="strat-thread-desc">Recuperar los visitantes de IG que dejaron de venir. Lookalike pagado + posts emocionales en días 13, 18 (Christian), 24 y 27. El target comercial más grande del mes.</div>
+        </div>
+        <div class="strat-thread">
+          <div class="strat-thread-num">Hilo 03 · Operación</div>
+          <div class="strat-thread-name">Rotación 3 PDV</div>
+          <div class="strat-thread-desc">Lunes Florencia (mueblería · WhatsApp 8748-2594). Martes Fortuna (lifestyle + turistas internacionales). El resto = AO1 + Liquidation. Cada PDV tiene día propio.</div>
+        </div>
+      </div>
+
+      <div class="strat-ops">
+        <div class="strat-op">
+          <div class="strat-op-label">WhatsApp · Lead Magnet</div>
+          <div class="strat-op-text">Toda mención de WhatsApp incluye CTA: <code>"Mandanos AVISAR + tu marca"</code> → se construye lista segmentada por marca para campañas futuras. Florencia: +506 8748-2594.</div>
+        </div>
+        <div class="strat-op">
+          <div class="strat-op-label">Mauro · Batching</div>
+          <div class="strat-op-text">5 stories/día se graban en bloques los <strong>domingos</strong> (graba semana siguiente). Solo stories de "tiempo real" (apertura, cacería, live) son del día. Evita burnout.</div>
+        </div>
+        <div class="strat-op">
+          <div class="strat-op-label">Hashtag Bank</div>
+          <div class="strat-op-text"><code>#liquidationoutlet</code> · <code>#americanoutlet</code> · <code>#a01</code> · <code>#3piso</code> · <code>#ciudadquesada</code> · <code>#sancarloscr</code> · <code>#newbalance</code> · <code>#marcareal</code></div>
+        </div>
+        <div class="strat-op">
+          <div class="strat-op-label">Inventario · Kill-Switch</div>
+          <div class="strat-op-text">Cada lunes en visita semanal: el encargado reporta qué se agotó. Contenido pendiente que lo menciona se reemplaza. Nunca prometemos algo que ya no tenemos.</div>
+        </div>
+        <div class="strat-op">
+          <div class="strat-op-label">Fortuna · Bilingüe</div>
+          <div class="strat-op-text">1 post/semana con caption EN para turistas yanquis camino al Arenal. Hashtags: <code>#arenalcr</code> <code>#costaricashopping</code>. Ticket alto, baja frecuencia.</div>
+        </div>
+        <div class="strat-op">
+          <div class="strat-op-label">Medición · Loop semanal</div>
+          <div class="strat-op-text">Lunes con Christian: revisar qué post trajo qué tráfico físico (preguntar a clientes en piso "¿dónde nos viste?"). Matar lo que no convierte, repetir lo que sí.</div>
+        </div>
+      </div>
     </div>
 
     <div class="cal-legend">
@@ -1054,74 +1194,22 @@
 
       <div class="ent-week">
         <div class="ent-week-label">Semana 1 · Expectativa · 5–10 mayo</div>
-        <div class="ent-list">
-          <div class="ent-item" data-group="flyer" data-id="f1-01" onclick="toggleEnt('f1-01')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer teaser 01 — "Algo se viene"</div><div class="ent-plats">IG · FB · formato cuadrado 1080×1080</div></div><div class="ent-meta">5 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f1-02" onclick="toggleEnt('f1-02')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer fecha reveal — "22.05.2026"</div><div class="ent-plats">IG · FB · fondo negro, fecha en naranja</div></div><div class="ent-meta">5 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f1-03" onclick="toggleEnt('f1-03')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer pista 01 — "Viene de EE.UU."</div><div class="ent-plats">IG · FB · bandera americana sutil de fondo</div></div><div class="ent-meta">7 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f1-04" onclick="toggleEnt('f1-04')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer countdown — "7 días"</div><div class="ent-plats">IG Stories · 1080×1920 · número en grande</div></div><div class="ent-meta">8 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f1-05" onclick="toggleEnt('f1-05')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer pista 02 — "La silueta" (zapatilla)</div><div class="ent-plats">IG · FB · silueta de producto en negro</div></div><div class="ent-meta">9 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f1-06" onclick="toggleEnt('f1-06')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer "El 3er piso se prepara"</div><div class="ent-plats">IG · FB · captura del espacio en preparación</div></div><div class="ent-meta">10 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f1-07" onclick="toggleEnt('f1-07')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer "La semana que viene, todo cambia"</div><div class="ent-plats">IG · FB · tono reflexivo, fondo negro</div></div><div class="ent-meta">11 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f1-08" onclick="toggleEnt('f1-08')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer promo por horario — AO Ciudad Quesada</div><div class="ent-plats">IG Stories · incluir horarios de atención</div></div><div class="ent-meta">Semana 1</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f1-09" onclick="toggleEnt('f1-09')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer promo por horario — AO Florencia</div><div class="ent-plats">IG Stories · versión Florencia</div></div><div class="ent-meta">Semana 1</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f1-10" onclick="toggleEnt('f1-10')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer promo por horario — AO Fortuna</div><div class="ent-plats">IG Stories · versión Fortuna</div></div><div class="ent-meta">Semana 1</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f1-11" onclick="toggleEnt('f1-11')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer "¿A quién llevás el 22?" — tag a un amigo</div><div class="ent-plats">IG · naranja sobre negro · viral</div></div><div class="ent-meta">11 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f1-12" onclick="toggleEnt('f1-12')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer para broadcast WA — mensaje expectativa</div><div class="ent-plats">WhatsApp · imagen acompañante del broadcast del 13</div></div><div class="ent-meta">13 mayo</div></div>
-        </div>
+        <div class="ent-list" id="ent-flyers-w1"><!-- auto-generado --></div>
       </div>
 
       <div class="ent-week">
         <div class="ent-week-label">Semana 2 · Expectativa · 11–17 mayo</div>
-        <div class="ent-list">
-          <div class="ent-item" data-group="flyer" data-id="f2-01" onclick="toggleEnt('f2-01')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer pre-lanzamiento — "Mañana llega todo"</div><div class="ent-plats">IG · FB · Stories · tono de clímax</div></div><div class="ent-meta">14 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f2-02" onclick="toggleEnt('f2-02')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer LANZAMIENTO — "Liquidation Outlet · 22 mayo"</div><div class="ent-plats">IG · FB · TikTok · pieza principal del gran día</div></div><div class="ent-meta">22 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f2-03" onclick="toggleEnt('f2-03')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer apertura 3er piso — "Ya está abierto"</div><div class="ent-plats">IG · FB · Stories · publicar a las 9am del 22</div></div><div class="ent-meta">22 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f2-04" onclick="toggleEnt('f2-04')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer producto estrella 01 — precio outlet visible</div><div class="ent-plats">IG · FB · precio en grande, marca visible</div></div><div class="ent-meta">15–16 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f2-05" onclick="toggleEnt('f2-05')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer producto estrella 02 — precio outlet visible</div><div class="ent-plats">IG · FB · segundo héroe del lanzamiento</div></div><div class="ent-meta">16–17 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f2-06" onclick="toggleEnt('f2-06')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer urgencia — "Cantidad limitada · Corre"</div><div class="ent-plats">IG · FB · rojo de urgencia, escasez visible</div></div><div class="ent-meta">17–18 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f2-07" onclick="toggleEnt('f2-07')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer Horas Locas por categoría</div><div class="ent-plats">IG · FB · horario + categoría + descuento</div></div><div class="ent-meta">Semana 2</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f2-08" onclick="toggleEnt('f2-08')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer AO Florencia — semana de lanzamiento</div><div class="ent-plats">IG · versión Florencia del lanzamiento</div></div><div class="ent-meta">Semana 2</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f2-09" onclick="toggleEnt('f2-09')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer AO Fortuna — semana de lanzamiento</div><div class="ent-plats">IG · versión Fortuna del lanzamiento</div></div><div class="ent-meta">Semana 2</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f2-10" onclick="toggleEnt('f2-10')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer broadcast WA — lanzamiento oficial</div><div class="ent-plats">WhatsApp · imagen del broadcast del 22 a las 7:30am</div></div><div class="ent-meta">22 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f2-11" onclick="toggleEnt('f2-11')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer "Primeras 48hs: San Carlos reacciona"</div><div class="ent-plats">IG · FB · prueba social post-apertura</div></div><div class="ent-meta">17 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f2-12" onclick="toggleEnt('f2-12')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer cierre semana 2 — "¿Ya viniste?"</div><div class="ent-plats">IG · FB · CTA directo, dirección incluida</div></div><div class="ent-meta">18 mayo</div></div>
-        </div>
+        <div class="ent-list" id="ent-flyers-w2"><!-- auto-generado --></div>
       </div>
 
       <div class="ent-week">
         <div class="ent-week-label">Semana 3 · Pre-Lanzamiento + Apertura · 18–24 mayo</div>
-        <div class="ent-list">
-          <div class="ent-item" data-group="flyer" data-id="f3-01" onclick="toggleEnt('f3-01')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer inventario en vivo — "Lo que todavía queda"</div><div class="ent-plats">IG Stories · transparencia + urgencia</div></div><div class="ent-meta">19 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f3-02" onclick="toggleEnt('f3-02')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer testimonial 01 — cliente real en tienda</div><div class="ent-plats">IG · FB · foto + frase del cliente, prueba social</div></div><div class="ent-meta">20–21 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f3-03" onclick="toggleEnt('f3-03')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer producto estrella 03 — semana 3</div><div class="ent-plats">IG · FB · basado en rotación real de la semana 1</div></div><div class="ent-meta">20 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f3-04" onclick="toggleEnt('f3-04')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer ruleta de descuentos — fin de semana familiar</div><div class="ent-plats">IG · FB · dinámico, colores llamativos</div></div><div class="ent-meta">23–24 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f3-05" onclick="toggleEnt('f3-05')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer dinámica de premios — activación familiar</div><div class="ent-plats">IG · Story · mecánica del juego explicada</div></div><div class="ent-meta">24–25 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f3-06" onclick="toggleEnt('f3-06')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer urgencia mid-mes — "Quedan pocos · Corre"</div><div class="ent-plats">IG · FB · tallas disponibles visibles</div></div><div class="ent-meta">22–23 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f3-07" onclick="toggleEnt('f3-07')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer "De EE.UU. directo a vos" — contraste de precio</div><div class="ent-plats">IG · FB · precio original USD vs precio AO ₡</div></div><div class="ent-meta">21 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f3-08" onclick="toggleEnt('f3-08')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer AO1 experiencia — "El 3er piso te espera"</div><div class="ent-plats">IG · foto editorial del espacio reformado</div></div><div class="ent-meta">Semana 3</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f3-09" onclick="toggleEnt('f3-09')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer AO Florencia — semana experiencia</div><div class="ent-plats">IG · versión Florencia semana 3</div></div><div class="ent-meta">Semana 3</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f3-10" onclick="toggleEnt('f3-10')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer AO Fortuna — semana experiencia</div><div class="ent-plats">IG · versión Fortuna semana 3</div></div><div class="ent-meta">Semana 3</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f3-11" onclick="toggleEnt('f3-11')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer encuesta — "¿Qué querés ver en junio?"</div><div class="ent-plats">IG Story · formato encuesta interactiva</div></div><div class="ent-meta">27 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f3-12" onclick="toggleEnt('f3-12')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer broadcast WA — semana 3 mid-mes</div><div class="ent-plats">WhatsApp · imagen para el broadcast semanal</div></div><div class="ent-meta">Semana 3</div></div>
-        </div>
+        <div class="ent-list" id="ent-flyers-w3"><!-- auto-generado --></div>
       </div>
 
       <div class="ent-week">
         <div class="ent-week-label">Semana 4 · Conversión + Cacería · 25–31 mayo</div>
-        <div class="ent-list">
-          <div class="ent-item" data-group="flyer" data-id="f4-01" onclick="toggleEnt('f4-01')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer cacería — "Esta semana: caza el precio"</div><div class="ent-plats">IG · FB · concepto de hunt, dinámica en tienda</div></div><div class="ent-meta">26 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f4-02" onclick="toggleEnt('f4-02')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer oferta oculta 01 — activación en tienda</div><div class="ent-plats">IG Stories · pista visual, sin revelar precio</div></div><div class="ent-meta">26–27 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f4-03" onclick="toggleEnt('f4-03')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer oferta oculta 02 — segunda activación</div><div class="ent-plats">IG Stories · segunda pista de la semana</div></div><div class="ent-meta">27–28 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f4-04" onclick="toggleEnt('f4-04')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer "¿Te atrevés?" — hunt de precios</div><div class="ent-plats">IG · TikTok · retador, gamificación visual</div></div><div class="ent-meta">28 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f4-05" onclick="toggleEnt('f4-05')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer últimas horas — "Stock limitado final"</div><div class="ent-plats">IG · FB · urgencia máxima, conteo regresivo</div></div><div class="ent-meta">29–30 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f4-06" onclick="toggleEnt('f4-06')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer cierre AO1 — "Gracias Ciudad Quesada · Mayo"</div><div class="ent-plats">IG · FB · emocional, agradecimiento</div></div><div class="ent-meta">31 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f4-07" onclick="toggleEnt('f4-07')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer cierre AO Florencia — mayo</div><div class="ent-plats">IG · versión Florencia cierre de mes</div></div><div class="ent-meta">31 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f4-08" onclick="toggleEnt('f4-08')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer cierre AO Fortuna — mayo</div><div class="ent-plats">IG · versión Fortuna cierre de mes</div></div><div class="ent-meta">31 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f4-09" onclick="toggleEnt('f4-09')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer "Volaron en mayo" — resultados del mes</div><div class="ent-plats">IG · FB · celebratorio, números reales si posible</div></div><div class="ent-meta">31 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f4-10" onclick="toggleEnt('f4-10')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer preview junio — "Junio viene fuerte"</div><div class="ent-plats">IG · FB · sembrar expectativa del siguiente mes</div></div><div class="ent-meta">31 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f4-11" onclick="toggleEnt('f4-11')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer broadcast WA — cierre de mayo</div><div class="ent-plats">WhatsApp · imagen del broadcast final del 30</div></div><div class="ent-meta">30 mayo</div></div>
-          <div class="ent-item" data-group="flyer" data-id="f4-12" onclick="toggleEnt('f4-12')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Flyer "Te vemos en junio, San Carlos"</div><div class="ent-plats">IG · FB · cierre emocional final del mes</div></div><div class="ent-meta">31 mayo</div></div>
-        </div>
+        <div class="ent-list" id="ent-flyers-w4"><!-- auto-generado --></div>
       </div>
     </div>
 
@@ -1132,14 +1220,7 @@
         <span class="ent-section-badge esb-reel">Josu · Producción · 4 reels</span>
         <span class="ent-section-count" id="count-reels">0 / 4</span>
       </div>
-      <div class="ent-list">
-        <div class="ent-item" data-group="reel" data-id="r01" onclick="toggleEnt('r01')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Reel 01 · Teaser "Algo se viene"</div><div class="ent-plats">IG · TikTok · pantalla en negro, sonido de caja, 8–12 seg · sin texto, solo el emoji 🔶 al final</div></div><div class="ent-meta">5 mayo</div></div>
-        <div class="ent-item" data-group="reel" data-id="r02" onclick="toggleEnt('r02')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Reel 02 · "El 3er piso se prepara"</div><div class="ent-plats">IG · TikTok · FB · b-roll cinematográfico, música épica, sin voz · texto final: "5 días"</div></div><div class="ent-meta">10 mayo</div></div>
-        <div class="ent-item" data-group="reel" data-id="r03" onclick="toggleEnt('r03')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Reel 03 · HÉROE — "Lanzamiento AO Revolution" ★ el más importante del mes</div><div class="ent-plats">IG · TikTok · FB · publicar antes de las 9am del 22 · apertura de puerta, clientes, reacciones reales, música épica</div></div><div class="ent-meta">22 mayo</div></div>
-        <div class="ent-item" data-group="reel" data-id="r04" onclick="toggleEnt('r04')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Reel 04 · "Primeras 48 horas: San Carlos reacciona"</div><div class="ent-plats">IG · TikTok · compilación de reacciones reales de clientes · sin guión</div></div><div class="ent-meta">17 mayo</div></div>
-        <div class="ent-item" data-group="reel" data-id="r05" onclick="toggleEnt('r05')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Reel 05 · "Testimonios reales en tienda"</div><div class="ent-plats">IG · TikTok · clientes hablando en cámara, espontáneo · mostrar producto comprado</div></div><div class="ent-meta">21 mayo</div></div>
-        <div class="ent-item" data-group="reel" data-id="r06" onclick="toggleEnt('r06')"><div class="ent-check">✕</div><div class="ent-item-info"><div class="ent-name">Reel 06 · "¿Te atrevés? Cacería de ofertas"</div><div class="ent-plats">IG · TikTok · dinámico, gamificado · mostrar cliente buscando ofertas ocultas en tienda</div></div><div class="ent-meta">28 mayo</div></div>
-      </div>
+      <div class="ent-list" id="ent-reels-list"><!-- auto-generado --></div>
     </div>
 
     <!-- ══ SECCIÓN C: CREADOR DE CONTENIDO ══ -->
@@ -2451,6 +2532,106 @@
     entUpdateStats();
   }
 
+  /* ── Auto-generación de Entregables desde CALENDAR_DATA ─────────────── */
+  function weekOfDay(day) {
+    if (day >= 5 && day <= 10) return 1;
+    if (day >= 11 && day <= 17) return 2;
+    if (day >= 18 && day <= 24) return 3;
+    return 4;
+  }
+
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  function buildEntItem(opts) {
+    var plats = (opts.platforms || []).join(' · ');
+    var meta = opts.meta || '';
+    var titleHtml = escHtml(opts.title);
+    var subHtml = escHtml(opts.sub || plats);
+    return '<div class="ent-item" data-group="' + opts.group + '" data-id="' + opts.id + '" onclick="toggleEnt(\'' + opts.id + '\')">' +
+      '<div class="ent-check">✕</div>' +
+      '<div class="ent-item-info">' +
+        '<div class="ent-name">' + titleHtml + '</div>' +
+        '<div class="ent-plats">' + subHtml + '</div>' +
+      '</div>' +
+      '<div class="ent-meta">' + escHtml(meta) + '</div>' +
+    '</div>';
+  }
+
+  function buildEntregables() {
+    var weeks = { 1: [], 2: [], 3: [], 4: [] };
+    var cinematicReels = [];
+
+    var dayKeys = Object.keys(CALENDAR_DATA).sort(function(a,b){ return parseInt(a)-parseInt(b); });
+    dayKeys.forEach(function(dk) {
+      var day = parseInt(dk, 10);
+      var items = CALENDAR_DATA[day].items || [];
+      items.forEach(function(item, idx) {
+        var id = 'd' + day + '-i' + idx;
+        if (item.type === 'post') {
+          weeks[weekOfDay(day)].push({
+            id: id, day: day, title: item.title,
+            platforms: item.platforms, time: item.time
+          });
+        } else if (item.type === 'reel' && /CINEMATOGR[ÁA]FICO/.test(item.title)) {
+          cinematicReels.push({
+            id: id, day: day, title: item.title,
+            platforms: item.platforms, time: item.time
+          });
+        }
+      });
+    });
+
+    // Render flyers por semana
+    for (var w = 1; w <= 4; w++) {
+      var container = document.getElementById('ent-flyers-w' + w);
+      if (!container) continue;
+      if (weeks[w].length === 0) {
+        container.innerHTML = '<div style="padding:18px;color:var(--gray-400);font-size:0.7rem;font-style:italic;">Sin flyers para esta semana — agregá posts a CALENDAR_DATA y se sincronizan acá.</div>';
+        continue;
+      }
+      container.innerHTML = weeks[w].map(function(e) {
+        return buildEntItem({
+          group: 'flyer', id: e.id,
+          title: 'Flyer · ' + e.title,
+          sub: (e.platforms || []).join(' · ') + (e.time ? ' · ' + e.time : ''),
+          meta: e.day + ' mayo'
+        });
+      }).join('');
+    }
+
+    // Render reels cinematográficos
+    var reelsList = document.getElementById('ent-reels-list');
+    if (reelsList) {
+      reelsList.innerHTML = cinematicReels.map(function(e) {
+        return buildEntItem({
+          group: 'reel', id: e.id,
+          title: e.title,
+          sub: (e.platforms || []).join(' · ') + (e.time ? ' · ' + e.time : ''),
+          meta: e.day + ' mayo'
+        });
+      }).join('');
+    }
+
+    // Actualizar badges/contadores con los conteos reales
+    var totalFlyers = weeks[1].length + weeks[2].length + weeks[3].length + weeks[4].length;
+    var totalReels = cinematicReels.length;
+    var flyerBadge = document.querySelector('.esb-flyer');
+    var reelBadge = document.querySelector('.esb-reel');
+    if (flyerBadge) flyerBadge.textContent = 'Josu · ' + totalFlyers + ' flyers';
+    if (reelBadge) reelBadge.textContent = 'Josu · Producción · ' + totalReels + ' reels';
+    var flyerStat = document.getElementById('stat-flyers');
+    var reelStat = document.getElementById('stat-reels');
+    if (flyerStat) flyerStat.textContent = '0/' + totalFlyers;
+    if (reelStat) reelStat.textContent = '0/' + totalReels;
+    var flyerCount = document.getElementById('count-flyers');
+    var reelCount = document.getElementById('count-reels');
+    if (flyerCount) flyerCount.textContent = '0 / ' + totalFlyers;
+    if (reelCount) reelCount.textContent = '0 / ' + totalReels;
+  }
+
+  buildEntregables();
   entLoad();
   entApply();
 
